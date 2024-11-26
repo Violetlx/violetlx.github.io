@@ -2,48 +2,31 @@
 home: true
 modules:
   - BannerBrand
+  - Features
   - Blog
   - MdContent
   - Footer
 bannerBrand:
   bgImage: '/bg.svg'
-  title: vuepress-reco
-  description: 一款简洁的 vuepress 博客 & 文档 主题。
-  tagline: vuepress-theme-reco 2.0 继续坚持简洁的风格，所有功能开箱即用，首页模块化组装，使用 tailwindcss 书写样式，将 Vite 作为默认编译器。你只需要负责内容创作，其他请交给我。
+  title: VioletDocs 文档
+  description: Violet 的文档记录仓库~
+  tagline: 星星之火，可以燎原!
   buttons:
-    - { text: Guide, link: '/docs/guide/introduce' }
-    - { text: Default Style, link: '/docs/style-default-api/introduce', type: 'plain' }
+    - { text: Violet 博客屋, link: 'https://violet.zeabur.app/' }
+    - { text: 搭建指南, link: 'https://theme-reco.vuejs.press/', type: 'plain' }
   socialLinks:
-    - { icon: 'LogoGithub', link: 'https://github.com/vuepress-reco/vuepress-theme-reco' }
+    - { icon: 'LogoGithub', link: 'https://github.com/Violetlx' }
 blog:
   socialLinks:
-    - { icon: 'LogoGithub', link: 'https://github.com/recoluan' }
+    - { icon: 'LogoGithub', link: 'https://github.com/Violetlx' }
+features:
+  - title: 过去
+    details: 回顾过去的价值。
+  - title: 当下
+    details: 应对当下的重要性。
+  - title: 未来
+    details: 展望未来的必要性。
 isShowTitleInHome: true
 actionText: About
 actionLink: /views/other/about
 ---
-
-## 快速开始
-
-**npx**
-
-```bash
-# 初始化，并选择 2.x
-npx @vuepress-reco/theme-cli init
-```
-
-**npm**
-
-```bash
-# 初始化，并选择 2.x
-npm install @vuepress-reco/theme-cli@1.0.7 -g
-theme-cli init
-```
-
-**yarn**
-
-```bash
-# 初始化，并选择 2.x
-yarn global add @vuepress-reco/theme-cli@1.0.7
-theme-cli init
-```

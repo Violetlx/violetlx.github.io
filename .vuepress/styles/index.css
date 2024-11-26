@@ -1,0 +1,10 @@
+.features__item{
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #4b4bff transparent;
+}

@@ -1,7 +1,14 @@
 [
-  { "text": "Home", "link": "/" },
-  { "text": "Categories", "link": "/categories/reco/1.html" },
-  { "text": "Tags", "link": "/tags/tag1/1.html" },
+  { "text": "首页", "link": "/" },
+  {
+    "text": "博文",
+    "children": [
+      { "text": "分页", "link": "/categories/reco/1.html" },
+      { "text": "标签", "link": "/tags/tag1/1.html" },
+      { "text": "时间轴", "link": "/timeline.html" },
+      { "text": "文章列表", "link": "/posts.html" }
+    ]
+  },
   {
     "text": "Docs",
     "children": [
