@@ -8,3 +8,19 @@
     scrollbar-width: thin;
     scrollbar-color: #4b4bff transparent;
 }
+
+h2 a span {
+    font-weight: bold !important;
+    font-size: 38px !important; /* 更大的字体大小 */
+    color: #3d3dea !important;
+}
+
+h3 a span {
+    font-weight: bold !important;
+    font-size: 28px !important; /* 更大的字体大小 */
+}
+
+h4 a span {
+    font-weight: bold !important;
+    font-size: 22px !important; /* 更大的字体大小 */
+}

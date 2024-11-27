@@ -15,5 +15,11 @@
       { "text": "vuepress-reco", "link": "/docs/theme-reco/theme" },
       { "text": "vuepress-theme-reco", "link": "/blogs/other/guide" }
     ]
+  },
+  {
+    "text": "SQL",
+    "children": [
+      { "text": "SQL使用", "link": "/docs/SQL/SQL使用/1_SQL教程/1-SQL教程" }
+    ]
   }
 ]
