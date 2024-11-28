@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as n}from"./app-Db-2iw8X.js";const i={};function r(a,l){return n(),t("div")}const c=e(i,[["render",r],["__file","friendship-link.html.vue"]]),o=JSON.parse('{"path":"/friendship-link.html","title":"","lang":"en-US","frontmatter":{"layout":"FriendshipLink"},"headers":[],"filePathRelative":null,"git":{}}');export{c as comp,o as data};
