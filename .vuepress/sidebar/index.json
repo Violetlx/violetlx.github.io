@@ -9,19 +9,19 @@
       "children": ["api", "plugin"]
     }
   ],
-  "/docs/SQL/SQL使用/": [
+  "/docs/SQL/SQL_Use/": [
     {
       "text": "SQL教程",
       "children": [
-        "1_SQL教程/1-SQL教程",
-        "1_SQL教程/2-SQL教程",
-        "1_SQL教程/3-SQL教程"
+        "1_SQL_Tutorial/1-SQL_Tutorial",
+        "1_SQL_Tutorial/2-SQL_Tutorial",
+        "1_SQL_Tutorial/3-SQL_Tutorial"
       ]
     },
     {
       "text": "SQL高级教程",
       "children": [
-        "2_SQL高级教程/SQL高级教程"
+        "2_SQL_AdvancedTutorials/1-SQL_AdvancedTutorials"
       ]
     }
   ]
