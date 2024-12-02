@@ -1,1 +1,0 @@
-import{_ as t,c as e,o as s}from"./app-DMr6eMoi.js";const o={};function a(c,n){return s(),e("div")}const l=t(o,[["render",a],["__file","posts.html.vue"]]),_=JSON.parse('{"path":"/posts.html","title":"","lang":"en-US","frontmatter":{"layout":"Posts"},"headers":[],"filePathRelative":null,"git":{}}');export{l as comp,_ as data};
