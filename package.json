@@ -19,6 +19,10 @@
     "vuepress-theme-reco": "2.0.0-rc.16"
   },
   "devDependencies": {
-    "@vuepress/plugin-git": "next"
+    "@vuepress/plugin-git": "next",
+    "@vuepress/plugin-markdown-ext": "next",
+    "@vuepress/plugin-markdown-math": "next",
+    "@vuepress/plugin-markdown-stylize": "next",
+    "katex": "^0.16.11"
   }
 }

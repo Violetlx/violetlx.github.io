@@ -9,7 +9,7 @@ date: 2024/11/26
 
 **SQL** ( `Structured Query Language` ，结构化查询语言) 是一种用于管理和操作关系型数据库的标准化编程语言。
 
-在线测试工具：https://www.jyshare.com/front-end/7768/
+在线测试工具：[https://www.jyshare.com/front-end/7768/](https://www.jyshare.com/front-end/7768/)
 
 
 
@@ -23,7 +23,7 @@ SQL 通过一系列的语句和命令来执行数据定义、数据查询、数�
 
 ### SQL 是什么？
 
-- SQL 值结构化查询语言，全称是 `Structured Query Language`
+- SQL 是结构化查询语言，全称是 `Structured Query Language`
 - SQL 让你可以访问和处理数据库，包括数据插入、查询、更新和删除
 - SQL 语言采用英语关键词，使其易读易写
 - SQL 有国际标准化组织 (ISO) 和美国国家标准协会 (ANSI) 标准化
@@ -47,9 +47,9 @@ SQL 通过一系列的语句和命令来执行数据定义、数据查询、数�
 
 ### SQL 是一种标准-但是 ...
 
-虽然 SQL 是一门 ANSI （American National Standards Institute 美国国家标准化组织）标准的计算机语言，但是任然存在着许多不同版本的 SQL 语言。
+虽然 SQL 是一门 ANSI （`American National Standards Institute` 美国国家标准化组织）标准的计算机语言，但是仍然存在着许多不同版本的 SQL 语言。
 
-然而，为了与 ANSI 标准相兼容，他们必须以相似的方式共同地来支持一些主要的命令 （比如 SELECT、UPDATE、DELETE、INSERT、WHERE 等等）。
+然而，为了与 ANSI 标准相兼容，他们必须以相似的方式共同地来支持一些主要的命令 （比如 `SELECT`、`UPDATE`、`DELETE`、`INSERT`、`WHERE` 等等）。
 
 > 💡   注释：除了 SQL 标准外，大部分 SQL 数据库都拥有它们自己的专有扩展！
 
@@ -208,7 +208,7 @@ SELECT * FROM Websites;
 
 以下是一些常用的 SQL 语句和语法：
 
-`SELECT`：用于从数据库中查询数据
+1 `SELECT`：用于从数据库中查询数据
 
 ```sql
 SELECT column_name(s)
@@ -219,10 +219,10 @@ ORDER BY column_name [ASC|DESC]
 
 - `column_name(s)` ：要查询的列
 - `table_name` ：要查询的表
-- `condition` ： 查询调价 （可选）
+- `condition` ： 查询条件 （可选）
 - `ORDER BY` ：排序方式，**ASC** 表示升序，**DESC** 表示降序
 
-`INSERT INTO` ：用于向数据库插入新数据
+2 `INSERT INTO` ：用于向数据库插入新数据
 
 ```sql
 INSERT INTO table_name (column1, column2, ...)
@@ -233,7 +233,7 @@ VALUES (value1, value2, ...)
 - `(column1, column2, ...)` ：要插入数据的列
 - `(value1, value2, ...)` ：对应列的值
 
-`UPDATE` ：用于更新数据库表中的现有数据
+3 `UPDATE` ：用于更新数据库表中的现有数据
 
 ```sql
 UPDATE table_name
@@ -245,7 +245,7 @@ WHERE condition
 - `column1 = value1, column2 = value2, ...` ：要更新的列及其新值
 - `condition` ：更新条件
 
-`DELETE` ：用于从数据库表中删除数据
+4 `DELETE` ：用于从数据库表中删除数据
 
 ```sql
 DELETE FROM table_name
@@ -255,7 +255,7 @@ WHERE condition
 - `table_name` ：要删除数据的表
 - `condition` ：删除条件
 
-`CREATE TABLE` ：用于创建新的数据库表
+5 `CREATE TABLE` ：用于创建新的数据库表
 
 ```sql
 CREATE TABLE table_name (
@@ -270,7 +270,7 @@ CREATE TABLE table_name (
 - `data_type` ：列的数据类型 （如 **INT**、**VARCHAR** 等）
 - `constraint` ：列的约束 （如 **PRIMARY KEY** 、**NOT NULL** 等）
 
-`ALETER TABLE` ：用于修改现有数据库表的结构
+6 `ALETER TABLE` ：用于修改现有数据库表的结构
 
 ```sql
 ALTER TABLE table_name
@@ -290,7 +290,7 @@ DROP COLUMN column_name
 
 - `column_name`：要删除的列
 
-`DROP TABLE` ：用于删除数据库表
+7 `DROP TABLE` ：用于删除数据库表
 
 ```sql
 DROP TABLE table_name
@@ -298,7 +298,7 @@ DROP TABLE table_name
 
 - `table_name` ：要删除的表
 
-`CREATE INDEX` ：用于创建索引，以加快查询速度
+8 `CREATE INDEX` ：用于创建索引，以加快查询速度
 
 ```sql
 CREATE INDEX index_name
@@ -308,7 +308,7 @@ ON table_name (column_name)
 - `index_name` ：索引的名称
 - `column_name` ：要索引的列
 
-`DROP INDEX` ：用于删除索引
+9 `DROP INDEX` ：用于删除索引
 
 ```sql
 DROP INDEX index_name
@@ -318,7 +318,7 @@ ON table_name
 - `index_name` ：要删除的索引名称
 - `table_name` ：索引所在的表
 
-`WHERE` ：用于指定筛选条件。
+10 `WHERE` ：用于指定筛选条件。
 
 ```sql
 SELECT column_name(s)
@@ -328,7 +328,7 @@ WHERE condition
 
 - `condition` ：筛选条件。
 
-`ORDER BY` ：用于对结果集进行排序
+11 `ORDER BY` ：用于对结果集进行排序
 
 ```sql
 SELECT column_name(s)
@@ -340,7 +340,7 @@ ORDER BY column_name [ASC|DESC]
 - `ASC` ：升序（默认）
 - `DESC` ：降序
 
-`GROUP BY` ：用于将结果集按一列或多列进行分组
+12 `GROUP BY` ：用于将结果集按一列或多列进行分组
 
 ```sql
 SELECT column_name(s), aggregate_function(column_name)
@@ -351,7 +351,7 @@ GROUP BY column_name(s)
 
 - `aggregate_function(column_name)` ：聚合函数 （如 **COUNT** 、**SUM** 、**AVG** 等）
 
-`HAVING` ：用于对分组后的结果集进行筛选
+13 `HAVING` ：用于对分组后的结果集进行筛选
 
 ```sql
 SELECT column_name(s), aggregate_function(column_name)
@@ -362,7 +362,7 @@ HAVING condition
 
 - `condition` ：筛选条件
 
-`JOIN` ：用于将两个或多个表的记录结合起来
+14 `JOIN` ：用于将两个或多个表的记录结合起来
 
 ```sql
 SELECT column_name(s)
@@ -373,7 +373,7 @@ ON table_name1.column_name = table_name2.column_name
 
 - `JOIN`: 可以是 INNER JOIN、LEFT JOIN、RIGHT JOIN 或 FULL JOIN。
 
-`DISTINCT` ：用于返回唯一不同的值。
+15 `DISTINCT` ：用于返回唯一不同的值。
 
 ```sql
 SELECT DISTINCT column_name(s)

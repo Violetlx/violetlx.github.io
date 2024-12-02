@@ -5,10 +5,17 @@ import { viteBundler } from '@vuepress/bundler-vite'
 import navbarData from "./navbar/index.json";
 // @ts-ignore
 import sidebarData from "./sidebar/index.json";
+// @ts-ignore
+import friendshipLinksData from "./friendshipLinks/index.json";
 import { gitPlugin } from '@vuepress/plugin-git';
+import { markdownMathPlugin } from '@vuepress/plugin-markdown-math'
+import { markdownStylizePlugin } from '@vuepress/plugin-markdown-stylize'
+import { markdownExtPlugin } from '@vuepress/plugin-markdown-ext'
+
 
 const zhNavbar = navbarData;
 const zhSidebar = sidebarData;
+const zhFriendshipLinks = friendshipLinksData;
 
 // @ts-ignore
 export default defineUserConfig({
@@ -29,6 +36,7 @@ export default defineUserConfig({
     // series 为原 sidebar
     series: zhSidebar,
     navbar: zhNavbar,
+    friendshipLinks: zhFriendshipLinks,
     markdown: {
       lineNumbers: true // 代码块显示行号
     },
@@ -55,6 +63,13 @@ export default defineUserConfig({
       },
     },
   }),
+  head: [
+    ["script", {
+      "language": "javascript",
+      "type": "text/javascript",
+      "src": "https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"
+    }],
+  ],
   plugins: [
     gitPlugin({
       // 配置项
@@ -62,6 +77,31 @@ export default defineUserConfig({
       ignore: [
           '**/~*.md'
       ]
+    }),
+    // 数学公式
+    markdownMathPlugin({
+      // 配置项
+      type: 'katex',
+      copy: true,
+      mhchem: true,
+    }),
+    markdownStylizePlugin({
+      align: true,
+      attrs: true,
+      mark: true,
+      spoiler: true,
+      sup: true,
+      sub: true,
+    }),
+    markdownExtPlugin({
+      // 选项
+      gfm: true,
+      footnote: true,
+      tasklist: true,
+      breaks: true,
+      linkify: true,
+      component: true,
+      vPre: true,
     }),
   ]
   // debug: true,

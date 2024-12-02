@@ -24,3 +24,13 @@ h4 a span {
     font-weight: bold !important;
     font-size: 22px !important; /* 更大的字体大小 */
 }
+
+
+.bulletin-wrapper {
+    top: 10rem;
+}
+
+
+.page-catalog-container {
+    width: 18rem !important;
+}

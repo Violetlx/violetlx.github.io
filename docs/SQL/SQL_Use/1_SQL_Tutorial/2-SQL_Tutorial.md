@@ -87,10 +87,6 @@ SELECT * FROM Websites;
 
 
 
-------
-
-
-
 ## SQL SELECT DISTINCT
 
 SELECT DISTINCT 语句用于返回唯一不同的值。
@@ -440,5 +436,4 @@ ORDER BY country,alexa;
 输出结果：
 
 ![ https://www.runoob.com/wp-content/uploads/2013/09/orderby3.jpg](https://www.runoob.com/wp-content/uploads/2013/09/orderby3.jpg)
-
 

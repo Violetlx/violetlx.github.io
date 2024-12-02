@@ -21,5 +21,6 @@
     "children": [
       { "text": "SQL使用", "link": "/docs/SQL/SQL_Use/1_SQL_Tutorial/1-SQL_Tutorial" }
     ]
-  }
+  },
+  { "text": "导航", "link": "/friendship-link.html" }
 ]
