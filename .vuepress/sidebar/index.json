@@ -21,7 +21,8 @@
     {
       "text": "SQL高级教程",
       "children": [
-        "2_SQL_AdvancedTutorials/1-SQL_AdvancedTutorials"
+        "2_SQL_AdvancedTutorials/1-SQL_AdvancedTutorials",
+        "2_SQL_AdvancedTutorials/2-SQL_AdvancedTutorials"
       ]
     }
   ]
