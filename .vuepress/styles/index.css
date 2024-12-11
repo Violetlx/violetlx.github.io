@@ -32,5 +32,9 @@ h4 a span {
 
 
 .page-catalog-container {
-    width: 18rem !important;
+    width: 22rem !important;
+}
+
+.page-container {
+    padding-left: 9rem !important;
 }
