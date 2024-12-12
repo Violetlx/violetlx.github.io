@@ -30,11 +30,42 @@ h4 a span {
     top: 10rem;
 }
 
-
-.page-catalog-container {
-    width: 22rem !important;
+.series-container {
+    width: 20rem !important; /* 固定宽度 */
+    overflow-y: auto; /* 允许垂直滚动 */
+    overflow-x: hidden; /* 隐藏水平滚动条 */
+    scrollbar-width: none; /* 隐藏滚动条（适用于 Firefox） */
+    -ms-overflow-style: none; /* 隐藏滚动条（适用于 IE 和 Edge） */
 }
 
-.page-container {
-    padding-left: 9rem !important;
+/* 隐藏滚动条（适用于 Webkit 浏览器，如 Chrome 和 Safari） */
+.series-container::-webkit-scrollbar {
+    display: none;
+}
+
+.page-catalog-container {
+    width: 22rem !important; /* 固定宽度 */
+    overflow-y: auto; /* 允许垂直滚动 */
+    overflow-x: hidden; /* 隐藏水平滚动条 */
+    scrollbar-width: none; /* 隐藏滚动条（适用于 Firefox） */
+    -ms-overflow-style: none; /* 隐藏滚动条（适用于 IE 和 Edge） */
+}
+
+/* 隐藏滚动条（适用于 Webkit 浏览器，如 Chrome 和 Safari） */
+.page-catalog-container::-webkit-scrollbar {
+    display: none;
+}
+
+.theme-container .theme-main {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 100% !important;
+}
+.reco-giscus-wrapper {
+    max-width: 100% !important;
+}
+
+.navbar-container .navbar-inner {
+    max-width: 100% !important;
 }

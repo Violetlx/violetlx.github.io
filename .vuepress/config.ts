@@ -11,6 +11,7 @@ import { gitPlugin } from '@vuepress/plugin-git';
 import { markdownMathPlugin } from '@vuepress/plugin-markdown-math'
 import { markdownStylizePlugin } from '@vuepress/plugin-markdown-stylize'
 import { markdownExtPlugin } from '@vuepress/plugin-markdown-ext'
+import { mediumZoomPlugin } from '@vuepress/plugin-medium-zoom'
 
 
 const zhNavbar = navbarData;
@@ -32,7 +33,6 @@ export default defineUserConfig({
     docsRepo: "https://github.com/Violetlx/violetlx.github.io/tree/gh-pages",
     docsBranch: "gh-pages",
     docsDir: "/docs",
-    lastUpdatedText: "",
     // series 为原 sidebar
     series: zhSidebar,
     navbar: zhNavbar,
@@ -62,6 +62,22 @@ export default defineUserConfig({
         //hideComments: true // 隐藏评论
       },
     },
+    tip: '提示',
+    info: '信息',
+    danger: '危险',
+    warning: '警告',
+    details: '详情',
+    tagsText: '标签',
+    backToHome: '返回首页',
+    categoriesText: '分类',
+    catalogTitle: '页面导航',
+    editLinkText: '编辑当前页面',
+    lastUpdatedText: '最后更新时间',
+    selectLanguageName: '简体中文',
+    notFound: '哇哦，没有发现这个页面！',
+    inputPasswordText: '请输入密码',
+    unlockSucessText: '密码正确，玩得开心！',
+    unlockFailuerText: '密码错误，请重新输入！'
   }),
   head: [
     ["script", {
@@ -102,6 +118,9 @@ export default defineUserConfig({
       linkify: true,
       component: true,
       vPre: true,
+    }),
+    mediumZoomPlugin({
+      selector: 'img',
     }),
   ]
   // debug: true,
