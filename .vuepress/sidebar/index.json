@@ -24,7 +24,15 @@
         "2_SQL_AdvancedTutorials/1-SQL_AdvancedTutorials",
         "2_SQL_AdvancedTutorials/2-SQL_AdvancedTutorials",
         "2_SQL_AdvancedTutorials/3-SQL_AdvancedTutorials",
-        "2_SQL_AdvancedTutorials/4-SQL_AdvancedTutorials"
+        "2_SQL_AdvancedTutorials/4-SQL_AdvancedTutorials",
+        "2_SQL_AdvancedTutorials/5-SQL_AdvancedTutorials",
+        "2_SQL_AdvancedTutorials/6-SQL_AdvancedTutorials"
+      ]
+    },
+    {
+      "text": "SQL函数",
+      "children": [
+        "3_SQL_Function/1-SQL_Function"
       ]
     }
   ]
