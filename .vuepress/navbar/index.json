@@ -17,6 +17,12 @@
     ]
   },
   {
+    "text": "Java",
+    "children": [
+      { "text": "Hutool工具包", "link": "/docs/Java/Hutool/1_Hutool_Introduce/1-Hutool_Introduce" }
+    ]
+  },
+  {
     "text": "SQL",
     "children": [
       { "text": "SQL使用", "link": "/docs/SQL/SQL_Use/1_SQL_Tutorial/1-SQL_Tutorial" }

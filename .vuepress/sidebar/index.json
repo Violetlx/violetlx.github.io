@@ -32,7 +32,24 @@
     {
       "text": "SQL函数",
       "children": [
-        "3_SQL_Function/1-SQL_Function"
+        "3_SQL_Function/1-SQL_Function",
+        "3_SQL_Function/2-SQL_Function",
+        "3_SQL_Function/3-SQL_Function"
+      ]
+    }
+  ],
+  "/docs/Java/Hutool/": [
+    {
+      "text": "Hutool简介",
+      "children": [
+        "1_Hutool_Introduce/1-Hutool_Introduce"
+      ]
+    },
+    {
+      "text": "Hutool-Core核心",
+      "children": [
+        "2_Hutool_Core/1-Hutool_Core",
+        "2_Hutool_Core/2-Hutool_Core"
       ]
     }
   ]
