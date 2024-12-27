@@ -305,127 +305,74 @@ public interface Resource {
 
 ### 2 资源工具-ResourceUtil
 
+### Ⅰ 介绍
 
+`ResourceUtil` 提供了资源快捷读取封装。
 
 
 
+### Ⅱ 使用
 
+ResourceUtil 中最核心的方法是 getResourceObj ，此方法可以根据传入路径是否为绝对路径而返回不同的实现。比如路径是：file:/opt/test，或者 /opt/test
 
+都会被当做绝对路径，此时调用 FileResource 来读取数据。如果不满足以上条件，默认用 `ClassPathResource` 读取 classpath 中的资源或者文件。
 
+同样，此工具类还封装了 readBytes 和 readStr 用于快捷读取 bytes 和字符串。
 
+举个例子，假设我们在 `classpath` 下放了一个 `test.xml` ，读取就变得非常简单：
 
+```java
+String str = ResourceUtil.readUtf8Str("test.xml");
+```
 
+假设我们的文件存放 `src/resources/config` 目录下，则读取改为：
 
+```java
+String str = ResourceUtil.readUtf8Str("config/test.xml");
+```
 
+> 注意 在 IDEA 中，新加入文件到 `src/resources` 目录下，需要重新 import 项目，以便在编译时顺利把资源文件拷贝到 target 目录下。如果找不到文件，请去 target 目录下确认文件是否存在。
+>
 
 
 
 
 
+### ③ ClassPath资源访问-ClassPathResource
 
+### Ⅰ 什么时 ClassPath
 
+简单来说 ClassPath 就是查找 class 文件的路径，在 Tomcat 等容器下，ClassPath 一般是 `WEB-INF/classes` ，在普通 java 程序中，我们可以通过定义 -cp 或者 -classpath 参数来定义查找 class 文件的路径，这些路径就是 ClassPath 。
 
+为了项目方便，我们定义的配置文件肯定不能用绝对路径，所以需要使用相对路径，这时候最好的办法就是把配置文件和 class 文件放在一起，便于查找。
 
 
 
+### Ⅱ 由来
 
+在 Java 编码过程中，我们常常希望读取项目内的配置文件，按照 Maven 的习惯，这些文件一般放在项目的 src/main/resources 下，读取的时候使用：
 
+```java
+String path = "config.properties";
+InputStream in = this.class.getResource(path).openStream();
+```
 
+使用当前类来获取资源其实就是使用当前类的类加载器获取资源，最后 openStream() 方法获取输入流来读取文件流。
 
 
 
+### Ⅲ 封装
 
+面对这种复杂的读取操作，我们封装了 `ClassPathResource` 类简化这种资源的读取：
 
+```java
+ClassPathResource resource = new ClassPathResource("test.properties");
+Properties properties = new Properties();
+properties.load(resource.getStream());
 
+Console.log("Properties: {}",properties);
+```
 
+这就大大简化了 ClassPath 中资源的获取。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+> Hutool 提供针对 properties 的封装类 Props ，同时提供更加强大的配置文件 Setting 类，这两个类已经针对 ClassPath 做过相应封装，可以以更加便捷的方式读取配置文件。

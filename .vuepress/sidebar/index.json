@@ -52,7 +52,9 @@
         "2_Hutool_Core/2-Hutool_Core",
         "2_Hutool_Core/3-Hutool_Core",
         "2_Hutool_Core/4-Hutool_Core",
-        "2_Hutool_Core/5-Hutool_Core"
+        "2_Hutool_Core/5-Hutool_Core",
+        "2_Hutool_Core/6-Hutool_Core",
+        "2_Hutool_Core/7-Hutool_Core"
       ]
     }
   ]
