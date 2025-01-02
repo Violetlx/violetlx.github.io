@@ -28,5 +28,11 @@
       { "text": "SQL使用", "link": "/docs/SQL/SQL_Use/1_SQL_Tutorial/1-SQL_Tutorial" }
     ]
   },
+  {
+    "text": "中间件",
+    "children": [
+      { "text": "Redis尚硅谷", "link": "/docs/Middleware/Redis/Redis_Atguigu/1_Redis_Base/1-Redis_Base" }
+    ]
+  },
   { "text": "导航", "link": "/friendship-link.html" }
 ]

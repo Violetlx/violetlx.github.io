@@ -893,6 +893,30 @@ Hutool 在3.2.0+ 中新增了 `ClipboardUtil` 这个类用于简化操作剪贴�
 - `setStr` 设置文本到剪贴板
 - `getStr` 从剪贴板获取文本
 
+```java
+    /**
+     * 针对文本
+     */
+    public static void test2(){
+        // 先右键复制内容到剪贴板再测试
+
+        //获取剪贴板内容
+        String str = ClipboardUtil.getStr();
+        System.out.println("test2--str==>"+str);
+
+        //设置剪贴板内容
+        ClipboardUtil.setStr("hello world");
+
+        //获取剪贴板内容
+        String str1 = ClipboardUtil.getStr();
+        System.out.println("test2--str1==>"+str1);
+
+        //结果：
+        //test2--str==>hello world
+        //test2--str1==>hello world
+    }
+```
+
 ③ 针对 Image 对象（图片）
 
 - `setImage` 设置图片到剪贴板

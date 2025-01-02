@@ -54,7 +54,17 @@
         "2_Hutool_Core/4-Hutool_Core",
         "2_Hutool_Core/5-Hutool_Core",
         "2_Hutool_Core/6-Hutool_Core",
-        "2_Hutool_Core/7-Hutool_Core"
+        "2_Hutool_Core/7-Hutool_Core",
+        "2_Hutool_Core/8-Hutool_Core"
+      ]
+    }
+  ],
+  "/docs/Middleware/Redis/Redis_Atguigu/": [
+    {
+      "text": "Redis基础",
+      "children": [
+        "1_Redis_Base/1-Redis_Base",
+        "1_Redis_Base/2-Redis_Base"
       ]
     }
   ]
