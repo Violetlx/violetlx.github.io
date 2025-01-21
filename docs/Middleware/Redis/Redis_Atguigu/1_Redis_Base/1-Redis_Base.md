@@ -21,7 +21,7 @@ Remote Dictionary Server(远程字典服务)是完全开源的，使用 ANSIC �
 
 ![1.Redis介绍.jpg](images/1-Redis_Base/1.Redis介绍.jpg)
 
-Redis之父——$\textcolor{red}{\text{安特雷兹}}$
+Redis之父——安特雷兹
 
 个人github：github.com/antirez    个人博客：antirez.com/latest/0
 

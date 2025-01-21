@@ -31,7 +31,8 @@
   {
     "text": "中间件",
     "children": [
-      { "text": "Redis尚硅谷", "link": "/docs/Middleware/Redis/Redis_Atguigu/1_Redis_Base/1-Redis_Base" }
+      { "text": "Redis尚硅谷", "link": "/docs/Middleware/Redis/Redis_Atguigu/1_Redis_Base/1-Redis_Base" },
+      { "text": "Redis黑马", "link": "/docs/Middleware/Redis/Redis_Heima/1_Redis_Entry/1-Redis_Entry" }
     ]
   },
   { "text": "导航", "link": "/friendship-link.html" }

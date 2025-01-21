@@ -55,7 +55,8 @@
         "2_Hutool_Core/5-Hutool_Core",
         "2_Hutool_Core/6-Hutool_Core",
         "2_Hutool_Core/7-Hutool_Core",
-        "2_Hutool_Core/8-Hutool_Core"
+        "2_Hutool_Core/8-Hutool_Core",
+        "2_Hutool_Core/9-Hutool_Core"
       ]
     }
   ],
@@ -65,6 +66,21 @@
       "children": [
         "1_Redis_Base/1-Redis_Base",
         "1_Redis_Base/2-Redis_Base"
+      ]
+    }
+  ],
+  "/docs/Middleware/Redis/Redis_Heima/": [
+    {
+      "text": "Redis入门篇",
+      "children": [
+        {
+          "text": "Redis快速入门",
+          "children": [
+            "1_Redis_Entry/1-Redis_Entry",
+            "1_Redis_Entry/2-Redis_Entry",
+            "1_Redis_Entry/3-Redis_Entry"
+          ]
+        }
       ]
     }
   ]
