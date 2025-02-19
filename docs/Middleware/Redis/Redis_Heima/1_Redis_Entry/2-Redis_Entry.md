@@ -312,191 +312,261 @@ OK
 
 
 
+## ⑤ List 类型
 
+Redis 中的 List 类型与 Java 中的 LinkedList 类似，可以看作是一个双向链表。既可以支持正向检索也可以支持反向检索。
 
+特征也与 LinkedList 类似：
 
+- 有序
+- 元素可以重复
+- 插入和删除快
+- 查询速度一般
 
+常用来存储一个有序数据，例如：朋友圈点赞列表，评论列表等。
 
 
 
+List 的常见命令有：
 
+- `LPUSH key element ...`：向列表左侧插入一个或多个元素
+- `LPOP key`：移除并返回列表左侧的第一个元素，没有则返回 null
+- `RPUSH key element ...`：向列表右边插入一个或多个元素
+- `RPOP key`：移除并返回列表右侧的第一个元素，没有则返回 null
+- `LRANGE key start end`：返回一段角标范围内的所有元素
+- `BLPOP 和 BRPOP`：与 LPOP 和 RPOP 类似，只不过在没有元素时等待指定时间，而不是直接返回 null
 
 
 
+```sh
+127.0.0.1:6379[5]> LPUSH users 1 2 3
+(integer) 3
+127.0.0.1:6379[5]> RPUSH users 4 5 6
+(integer) 6
+127.0.0.1:6379[5]> LPOP users
+"3"
+127.0.0.1:6379[5]> RPOP users
+"6"
+127.0.0.1:6379[5]> LRANGE users 1 2
+1) "1"
+2) "4"
+127.0.0.1:6379[5]> 
+```
 
 
 
+**思考：**
 
+1.如何利用 List 结构模拟一个栈？
 
+- 入口和出口在同一边
 
+2.如何利用 List 结构模拟一个队列？
 
+- 入口和出口在不同边
 
+3.如何利用 List 结构模拟一个阻塞队列？
 
+- 入口和出口在不同边
+- 出队时采用 BLPOP 或 BRPOP
 
 
 
+## ⑥ Set 类型
 
+Redis 的 set 结构与 Java 中的 HashSet 类似，可以看作是一个 value 为 null 的 HashMap。因为也是一个 hash 表，因此具备与 HashSet 类似的特征：
 
+- 无序
+- 元素不可重复
+- 查找快
+- 支持交集、并集、差集等功能
 
 
 
+Set 的常见命令有：
 
+- `SADD key member ...`：向 set 中添加一个或多个元素
+- `SREM key member ...`：移除 set 中的指定元素
+- `SCARD key`：返回 set 中元素的个数
+- `SISMEMBER key member`：判断一个元素是否存在 set 中
+- `SMEMBERS`：获取 set 中的所有元素
+- `SINTER key1 key2 ...`：求 key1 和 key2 的交集
+- `SDIFF key1 key2 ...`：求 key1 和 key2 的差集
+- `SUNION key1 key2 ...`：求 key1 和 key2 的并集
 
 
 
+```sh
+127.0.0.1:6379[5]> sadd s1 a b c
+(integer) 3
+127.0.0.1:6379[5]> SMEMBERS s1
+1) "c"
+2) "a"
+3) "b"
+127.0.0.1:6379[5]> SREM s1 a
+(integer) 1
+127.0.0.1:6379[5]> SISMEMBER s1 a
+(integer) 0
+127.0.0.1:6379[5]> SISMEMBER s1 b
+(integer) 1
+127.0.0.1:6379[5]> SCARD s1
+(integer) 2
+127.0.0.1:6379[5]> 
+```
 
 
 
+例如两个集合：s1和s2:
 
+![image-20250212104338230](images/2-Redis_Entry/image-20250212104338230.png)
 
+求交集：SINTER s1 s2
 
+求s1与s2的不同：SDIFF s1 s2
 
+![image-20250212104400333](images/2-Redis_Entry/image-20250212104400333.png)
 
+练习：
 
+1.将下列数据用 Redis 的 Set 集合来存储：
 
+- 张三的好友有：李四、王五、赵六
+- 李四的好友有：王五、麻子、二狗
 
+2.利用 Set 的命令实现下列功能：
 
+- 计算张三的好友有几人
+- 计算张三和李四有哪些共同好友
+- 查询哪些人是张三的好友却不是李四的好友
+- 查询张三和李四的好友总共有哪些人
+- 判断李四是否是张三的好友
+- 将李四从张三的好友列表中移除
 
 
 
+```sh
+127.0.0.1:6379[5]> SADD zs ls ww zl
+(integer) 3
+127.0.0.1:6379[5]> SADD ls ww mz eg
+(integer) 3
+127.0.0.1:6379[5]> SMEMBERS zs
+1) "zl"
+2) "ww"
+3) "ls"
+127.0.0.1:6379[5]> SMEMBERS ls
+1) "eg"
+2) "mz"
+3) "ww"
+127.0.0.1:6379[5]> SCARD zs
+(integer) 3
+127.0.0.1:6379[5]> SINTER zs ls
+1) "ww"
+127.0.0.1:6379[5]> SDIFF zs ls
+1) "zl"
+2) "ls"
+127.0.0.1:6379[5]> SUNION zs ls
+1) "ls"
+2) "ww"
+3) "eg"
+4) "zl"
+5) "mz"
+127.0.0.1:6379[5]> SISMEMBER zs ls
+(integer) 1
+127.0.0.1:6379[5]> SISMEMBER ls zs
+(integer) 0
+127.0.0.1:6379[5]> SREM zs ls
+(integer) 1
+127.0.0.1:6379[5]> SMEMBERS zs
+1) "zl"
+2) "ww"
+127.0.0.1:6379[5]>
+```
 
 
 
+## ⑦ SortedSet 类型
 
+Redis 的 SortedSet 是一个可排序的 set 集合，与 Java 中的 TreeSet 有些类似，但底层数据结构却差别很大。SortedSet 中的每一个元素都带有一个 score 属性，可以基于 score 属性对元素排序，底层的实现是一个跳表 (SkipList) 加 hash 表。
 
+SortedSet 具备下列特性：
 
+- 可排序
+- 元素不重复
+- 查询速度快
 
+因为 SortedSet 的可排序特性，经常被用来实现排行榜这样的功能。
 
 
 
+SortedSet 的常见命令有：
 
+- `ZADD key score member`：添加一个或多个元素到 SortedSet ，如果已经存在则更新其 score 值
+- `ZREM key member`：删除 SortedSet 中的一个指定元素
+- `ZSCORE key member`：获取 SortedSet 中的指定元素的 score 值
+- `ZRANK key member`：获取 SortedSet 中的指定元素的排名
+- `ZCARD key`：获取 SortedSet 中的元素个数
+- `ZCOUNT key min max`：统计 score 值在给定范围内的所有元素的个数
+- `ZINCRBY key increment member`：让 SortedSet 中的指定元素自增，步长为指定的 increment 值
+- `ZRANGE key min max`：按照 score 排序后，获取指定排名范围内的元素
+- `ZRANGEBYSCORE key min max`：按照 score 排序后，获取指定 score 范围内的元素
+- `ZDIFF、ZINTER、ZUNION`：求差集、交集、并集
 
+::: tip
 
+注意：所有的排名默认都是升序，如果要降序则在命令的 Z 后面添加 REV 即可，例如：
 
+- **升序**获取sorted set 中的指定元素的排名：ZRANK key member
+- **降序**获取sorted set 中的指定元素的排名：ZREVRANK key memeber
 
+:::
 
 
 
+练习题：
 
+将班级的下列学生得分存入 Redis 的 SortedSet 中：
 
+Jack 85, Lucy 89, Rose 82, Tom 95, Jerry 78, Amy 92, Miles 76
 
+并实现下列功能：
 
+- 删除Tom同学
+- 获取Amy同学的分数
+- 获取Rose同学的排名
+- 查询80分以下有几个学生
+- 给Amy同学加2分
+- 查出成绩前3名的同学
+- 查出成绩80分以下的所有同学
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```sh
+127.0.0.1:6379[5]> ZADD stus 85 Jack 89 Lucy 82 Rose 95 Tom 78 Jerry 92 Amy 76 Miles
+(integer) 7
+127.0.0.1:6379[5]> ZREM stus Tom
+(integer) 1
+127.0.0.1:6379[5]> ZRANK stus Rose
+(integer) 2
+127.0.0.1:6379[5]> ZREVRANK stus Rose
+(integer) 3
+127.0.0.1:6379[5]> ZCARD stus
+(integer) 6
+127.0.0.1:6379[5]> ZCOUNT stus 0 80
+(integer) 2
+127.0.0.1:6379[5]> ZINCRBY stus 2 Amy
+"94"
+127.0.0.1:6379[5]> ZINCRBY stus -2 Amy
+"92"
+127.0.0.1:6379[5]> ZRANGE stus 0 2
+1) "Miles"
+2) "Jerry"
+3) "Rose"
+127.0.0.1:6379[5]> ZREVRANGE stus 0 2
+1) "Amy"
+2) "Lucy"
+3) "Jack"
+127.0.0.1:6379[5]> ZRANGEBYSCORE stus 0 80
+1) "Miles"
+2) "Jerry"
+127.0.0.1:6379[5]>
+```

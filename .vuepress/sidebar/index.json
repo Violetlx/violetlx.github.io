@@ -82,6 +82,20 @@
           ]
         }
       ]
+    },
+    {
+      "text": "Redis实战篇",
+      "children": [
+        {
+          "text": "Redis黑马点评项目",
+          "children": [
+            "2_Redis_Actual/1-Redis_Actual",
+            "2_Redis_Actual/2-Redis_Actual",
+            "2_Redis_Actual/3-Redis_Actual",
+            "2_Redis_Actual/4-Redis_Actual"
+          ]
+        }
+      ]
     }
   ]
 }
