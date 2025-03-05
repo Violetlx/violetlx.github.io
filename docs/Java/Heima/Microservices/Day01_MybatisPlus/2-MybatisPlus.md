@@ -23,23 +23,23 @@ date: 2025/03/05
 
 除了新增以外，修改、删除、查询的SQL语句都需要指定where条件。因此BaseMapper中提供的相关方法除了以`id`作为`where`条件以外，还支持更加复杂的`where`条件。
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=NTRlMWE5YjA0YTEyMjJlYTBiMTg0OGYwODI1MzM4NGVfOUhYd3Z2b2ltNWl5U1QzcHMzb09USklvNXhrMXNHOTNfVG9rZW46QXlTUGJCVVVTb25wa3p4Y0x6SGNLTlhwblVjXzE3NDExNTU4MjQ6MTc0MTE1OTQyNF9WNA)
+![image-20250305154509479](images/2-MybatisPlus/image-20250305154509479.png)
 
 参数中的`Wrapper`就是条件构造的抽象类，其下有很多默认实现，继承关系如图：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=NDc3ZWQ3MmZiZjhjMzljZWMwMTE3MmQyOWYzOTliYmVfdFN3bnF4eTIzZ2o5eGltRm0yUGtQZko2VnQ2RG5PYlFfVG9rZW46WjFUU2JGUk1ubzZWaWp4Q1BDbmN6MmdEbjNlXzE3NDExNTU4MjQ6MTc0MTE1OTQyNF9WNA)
+![image-20250305154527239](images/2-MybatisPlus/image-20250305154527239.png)
 
 `Wrapper`的子类`AbstractWrapper`提供了where中包含的所有条件构造方法：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=Yjc0M2E1MjA1YWIyMjA1ZGYxMjEzNDYxZjg5ZjEyMjlfWjlqN2hlZThxVUVlN2tIenpRMm1xQjlTdXYxa2p4ZW1fVG9rZW46RXlZeWJzZnBBb0FaVnF4V2p5YmNXSzNlbmFmXzE3NDExNTU4MjQ6MTc0MTE1OTQyNF9WNA)
+![image-20250305154539603](images/2-MybatisPlus/image-20250305154539603.png)
 
 而QueryWrapper在AbstractWrapper的基础上拓展了一个select方法，允许指定查询字段：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=Mjc4YmMwNjkwZDcyYTgzYTliOGNlZmJkNTY1OTY1MjFfclNVZ1hUU1Q4bXZSTGlnTnZKNGdXYmtsTllLUU9uMnlfVG9rZW46RVVzUmJwaERQbzJNNTN4WjBrSGNCMWhFbmpoXzE3NDExNTU4MjQ6MTc0MTE1OTQyNF9WNA)
+![image-20250305154551657](images/2-MybatisPlus/image-20250305154551657.png)
 
 而UpdateWrapper在AbstractWrapper的基础上拓展了一个set方法，允许指定SQL中的SET部分：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=NjE0N2Y4YjY5MDYzOWNiM2QzYWIxMjY4ZDJhYTZiOTFfTlIxcXN1ZDRKZ2RqMUFtQmlwM3JJYTNacWtIZ283ckFfVG9rZW46TDZVRWJEZ1V5b0R4blZ4UW92SWNpYmEzbmRiXzE3NDExNTU4MjQ6MTc0MTE1OTQyNF9WNA)
+![image-20250305154604878](images/2-MybatisPlus/image-20250305154604878.png)
 
 接下来，我们就来看看如何利用`Wrapper`实现复杂查询。
 
@@ -139,7 +139,7 @@ void testLambdaQueryWrapper() {
 
 在演示UpdateWrapper的案例中，我们在代码中编写了更新的SQL语句：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=MWU0ZGM1MmI3NzRhMGMwMGYzNTNkNzY1MDQ5ZmM3NzRfZ3prRFhNU2JVM2Q3M2tIang2WXVaQkZZSGc4QXQzSjBfVG9rZW46WUR5cGJEalh3b3JXRmV4eEVHWGNtelZvbkNlXzE3NDExNTYyMjI6MTc0MTE1OTgyMl9WNA)
+![image-20250305154625897](images/2-MybatisPlus/image-20250305154625897.png)
 
 这种写法在某些企业也是不允许的，因为SQL语句最好都维护在持久层，而不是业务层。就当前案例来说，由于条件是in语句，只能将SQL写在Mapper.xml文件，利用foreach来生成动态SQL。 这实在是太麻烦了。假如查询条件更复杂，动态SQL的编写也会更加复杂。
 
@@ -259,7 +259,7 @@ MybatisPlus不仅提供了BaseMapper，还提供了通用的Service接口及默�
 
 我们先俩看下基本的CRUD接口。 **新增**：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=OWU5ZTQxNzUyM2Y0NDEwOWMyMWY0Nzc2ZDE2YzJhMzRfdmNud2NrQ2ZqVUNLZHRybElQQ3FEbzd4OTJLZXRxSlJfVG9rZW46WGJpS2JCZ0Ixb1k2aER4V3ZCVmNwWDlsbkZoXzE3NDExNTY3OTM6MTc0MTE2MDM5M19WNA)
+![image-20250305154654892](images/2-MybatisPlus/image-20250305154654892.png)
 
 - `save`是新增单个元素
 - `saveBatch`是批量新增
@@ -268,7 +268,7 @@ MybatisPlus不仅提供了BaseMapper，还提供了通用的Service接口及默�
 
 **删除：**
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=ZjZmODcxNjI5Y2U4MmFhYTdkNTE0MDY1NWEzYzQ5OWZfRjJST2lCVkFFT2M2STg3VkNtdkZEWnd1VXFQYkdiY1VfVG9rZW46T2dBcGJNVGJGbzA3OTJ4Q0hjQmNJa3libmZkXzE3NDExNTY3OTM6MTc0MTE2MDM5M19WNA)
+![image-20250305154711635](images/2-MybatisPlus/image-20250305154711635.png)
 
 - `removeById`：根据id删除
 - `removeByIds`：根据id批量删除
@@ -278,7 +278,7 @@ MybatisPlus不仅提供了BaseMapper，还提供了通用的Service接口及默�
 
 **修改：**
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=OTc5YWEzNzhlNzg3MTU1YWE4ZTI2YTk0MWFjNjM1NmVfQ3ZqdjZEUUxwaHRCWUlPWllQbmFZQ2hWaUlYUEZMSVZfVG9rZW46RnpNTWJEdFNRb0NFeVN4ZVd0MWM4VGNYbkdkXzE3NDExNTY3OTM6MTc0MTE2MDM5M19WNA)
+![image-20250305154724729](images/2-MybatisPlus/image-20250305154724729.png)
 
 - `updateById`：根据id修改
 - `update(Wrapper<T>)`：根据`UpdateWrapper`修改，`Wrapper`中包含`set`和`where`部分
@@ -287,7 +287,7 @@ MybatisPlus不仅提供了BaseMapper，还提供了通用的Service接口及默�
 
 **Get：**
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=YmI0OTE3ZWMzMWNiOTNmZTBhNWRlZGYxYmNjNzZjMzFfcVI2OVFHR2dxVkM4a29XSzBDM1RaTjdBZTVwNDhCeUhfVG9rZW46UXN6ZGJjNTB6b0xwdUl4NEI4dWNHbnp0bjdmXzE3NDExNTY3OTM6MTc0MTE2MDM5M19WNA)
+![image-20250305154737213](images/2-MybatisPlus/image-20250305154737213.png)
 
 - `getById`：根据id查询1条数据
 - `getOne(Wrapper<T>)`：根据`Wrapper`查询1条数据
@@ -295,7 +295,7 @@ MybatisPlus不仅提供了BaseMapper，还提供了通用的Service接口及默�
 
 **List：**
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=OGMxZTgyZjExNjgyODE0NzE4ODBiYTI5ZjBkMWU5ZGFfWVJ5elh0OGxpcklYbWpDR1BqTTExMFNva0F5T0FDMlFfVG9rZW46UWhVNmI3TFdZb0tlR0N4NGFOVmNObklCblZkXzE3NDExNTY3OTM6MTc0MTE2MDM5M19WNA)
+![image-20250305154748423](images/2-MybatisPlus/image-20250305154748423.png)
 
 - `listByIds`：根据id批量查询
 - `list(Wrapper<T>)`：根据Wrapper条件查询多条数据
@@ -303,14 +303,14 @@ MybatisPlus不仅提供了BaseMapper，还提供了通用的Service接口及默�
 
 **Count**：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=OGVlYTA0YTU2MzU1MzJlMTg3OWExYjBmNzI5NGU5ZmRfcThGWlRSVVBRTVJmYjFQQ09IbTZpY2pXMGo0Y21MaVJfVG9rZW46UndyZ2JaUFQwb2VoekJ4cE1VMmN0NlhLbmlmXzE3NDExNTY3OTM6MTc0MTE2MDM5M19WNA)
+![image-20250305154800650](images/2-MybatisPlus/image-20250305154800650.png)
 
 - `count()`：统计所有数量
 - `count(Wrapper<T>)`：统计符合`Wrapper`条件的数据数量
 
 **getBaseMapper**： 当我们在service中要调用Mapper中自定义SQL时，就必须获取service对应的Mapper，就可以通过这个方法：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=MGM1ZWU2YTI1MDg4NDQyYWU2MTdiODBmOTAyZmEyN2RfZ0F1SENNdXE4bUFtUFduRUJONko4UHJGVUo1RzNxT29fVG9rZW46TFdqc2JTMVUzb1JCdXh4MWhDMGMxMzdBbmpoXzE3NDExNTY3OTM6MTc0MTE2MDM5M19WNA)
+![image-20250305154811087](images/2-MybatisPlus/image-20250305154811087.png)
 
 
 

@@ -25,27 +25,27 @@ date: 2025/03/05
 
 复制课前资料提供好的一个项目到你的工作空间（不要包含空格和特殊字符）：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=YTA0NGM5NzBjNDgzYWQ3MTEzZjkxYWVlODgzYWNjZWRfTjlzd3pQbzNZbW54cGc1ZGVqd0UxYmtJRGxZVktuVjJfVG9rZW46TmU0M2JNbkFVbzZIekl4Z1RrYmNEYmFsblJiXzE3NDExNDcwMjI6MTc0MTE1MDYyMl9WNA)
+![image-20250305154026009](images/1-MybatisPlus/image-20250305154026009.png)
 
 然后用你的IDEA工具打开，项目结构如下：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=NjMxNTUyZGNhN2FlMzFkYTRlMjUxYTMyZWVlMjQ1ZTFfeEwzZFZBdTNNTW1zZFJEMHdyVk5vdHVtbFhiNXJDcFRfVG9rZW46WjhOSmJOMUp5bzFqeEt4R2xvTmN3R1JHbk5mXzE3NDExNDcwMjI6MTc0MTE1MDYyMl9WNA)
+![image-20250305154154248](images/1-MybatisPlus/image-20250305154154248.png)
 
 注意配置一下项目的JDK版本为JDK11。首先点击项目结构设置：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=Y2IzZGY1NGJjNzhmOGM2ZjZlM2JjNzVmZGRiOTA0MzZfalVRc3ZXUzJQbDIwb28zc3J4eTMybVREMlZVVmZhMGVfVG9rZW46TXV2ZmJKQlJwb1pCbHl4Zkt3eGNLdDRrbkpoXzE3NDExNDcwMjI6MTc0MTE1MDYyMl9WNA)
+![image-20250305154216079](images/1-MybatisPlus/image-20250305154216079.png)
 
 在弹窗中配置JDK：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=NDM0NTVjMjc1ODI3NmNkZWM4MDZhM2IyY2MwNjdhM2FfSFR3MGhlNTBSSXVmV0xySElOR0VZTzFYRjQxQ09waFpfVG9rZW46TEVRbWJ0UVR4b0s0eld4SDRyRWNFd1dIbnFoXzE3NDExNDcwMjI6MTc0MTE1MDYyMl9WNA)
+![image-20250305154239799](images/1-MybatisPlus/image-20250305154239799.png)
 
 接下来，要导入两张表，在课前资料中已经提供了SQL文件：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=N2I1Njg4MzAxZjAwNTg1OTA4OTI0NjY5NTkxYzU2M2ZfcGxNSHZ6RTlCbGJPQXFmQjNiSGZZZGg3MXRiN1RqdUpfVG9rZW46WTNvN2JQZ0c4b0ZNQmt4MlVuVmNlZm9lblNkXzE3NDExNDcwMjI6MTc0MTE1MDYyMl9WNA)
+![image-20250305154255407](images/1-MybatisPlus/image-20250305154255407.png)
 
 对应的数据库表结构如下：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=NjNkOTg1MDY2NmM0Yjc4YzQxNWU5MTBhZTQ1NGNkYTBfU0p1WjdROEVSNExFMnN4UmI3ejd4c2hZTWpMa09ITU9fVG9rZW46Qm5uU2JHQm12b0s0eTB4SENyYWM0alFjbnpkXzE3NDExNDcwMjI6MTc0MTE1MDYyMl9WNA)
+![image-20250305154310270](images/1-MybatisPlus/image-20250305154310270.png)
 
 最后，在`application.yaml`中修改jdbc参数为你自己的数据库参数：
 
@@ -121,11 +121,11 @@ MybatisPlus提供了starter，实现了自动Mybatis以及MybatisPlus的自动�
 
 为了简化单表CRUD，MybatisPlus提供了一个基础的`BaseMapper`接口，其中已经实现了单表的CRUD：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=OWZhZTI1N2EwYTQ3MTY0Y2FiNmE0Y2ZkYmI4YjUyOWZfSWE1OUVWQmNabWdUWTBwdGdadjR1dFhTbU9wY0dzZmZfVG9rZW46S0ZZdmJYdzdmb1BmM0x4dzVDamNkbTdvbnRiXzE3NDExNDcyNjM6MTc0MTE1MDg2M19WNA)
+![image-20250305154336758](images/1-MybatisPlus/image-20250305154336758.png)
 
 因此我们自定义的Mapper只要实现了这个`BaseMapper`，就无需自己实现单表CRUD了。 修改mp-demo中的`com.itheima.mp.mapper`包下的`UserMapper`接口，让其继承`BaseMapper`：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=YjVmMzI2ZmZmM2U4YmQ0ZDY1Y2I2NmUyNTE4ODZiOGRfSFd6SDZEY0kwOFVTSlZWd29GOXRTUVZ1SkJoUHlHaWJfVG9rZW46QzJDNGJOQ29yb25tMVB4aUQwS2NGNjdNbmxjXzE3NDExNDcyNjM6MTc0MTE1MDg2M19WNA)
+![image-20250305154351779](images/1-MybatisPlus/image-20250305154351779.png)
 
 代码如下：
 
@@ -226,7 +226,7 @@ user = User(id=5, username=Lucy, password=123, phone=18688990011, info={"age": 2
 
 大家回忆一下，UserMapper在继承BaseMapper的时候指定了一个泛型：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=YWNhNzJiOGMzNmFlNTc4NzU2ZWM0OTA0M2RiYWUyNDNfY3RmdE9rYjE5Z0lHMkRkOHhnSHRrbFIzN0NkaXRZQmtfVG9rZW46U1N6b2JzS1cxbzUySnh4WlRaamMyZU45bmhlXzE3NDExNDc1MjY6MTc0MTE1MTEyNl9WNA)
+![image-20250305154411659](images/1-MybatisPlus/image-20250305154411659.png)
 
 泛型中的User就是与数据库对应的PO.
 
@@ -396,7 +396,7 @@ mybatis-plus:
 
 例如，我们新建一个`UserMapper.xml`文件：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=ZjhhMDI5NjBlOWUxMTQ2NDA4ZTYzMGE2Y2EwY2M1MzZfaVM3RnlZQmFYYWl2ME43cGY1Y09laVNCbThyclFOYnJfVG9rZW46RnhoNGJBQVZLb3Rpcmd4a24xNWNVMUhXbkRoXzE3NDExNTUxNTQ6MTc0MTE1ODc1NF9WNA)
+![image-20250305154440064](images/1-MybatisPlus/image-20250305154440064.png)
 
 然后在其中定义一个方法：
 
