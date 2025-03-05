@@ -31,7 +31,7 @@ jobs:
         run: npm install -g cnpm --registry=https://registry.npmmirror.com
 
       - name: 安装项目依赖
-        run: cnpm install @vuepress/bundler-vite@2.0.0-rc.18 @vuepress/bundler-webpack@2.0.0-rc.18 @vuepress/plugin-git@2.0.0-rc.54 @vuepress/plugin-medium-zoom@^2.0.0-rc.55 vue@^3.5.0 vuepress@2.0.0-rc.18 vuepress-plugin-code-copy@^1.0.6 vuepress-theme-reco@^2.0.0-rc.25 @vuepress/plugin-markdown-ext@2.0.0-rc.65 @vuepress/plugin-markdown-math@2.0.0-rc.65 @vuepress/plugin-markdown-stylize@2.0.0-rc.65 katex@^0.16.11
+        run: cnpm install @vuepress/bundler-vite@2.0.0-rc.18 @vuepress/bundler-webpack@2.0.0-rc.18 @vuepress/plugin-git@2.0.0-rc.54 @vuepress/plugin-medium-zoom@2.0.0-rc.55 vue@^3.5.0 vuepress@2.0.0-rc.18 vuepress-plugin-code-copy@^1.0.6 vuepress-theme-reco@2.0.0-rc.25 @vuepress/plugin-markdown-ext@2.0.0-rc.65 @vuepress/plugin-markdown-math@2.0.0-rc.65 @vuepress/plugin-markdown-stylize@2.0.0-rc.65 katex@^0.16.11
 
       - name: 构建文档
         env:
