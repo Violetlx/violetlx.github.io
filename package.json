@@ -13,17 +13,18 @@
   "dependencies": {
     "@vuepress/bundler-vite": "2.0.0-rc.18",
     "@vuepress/bundler-webpack": "2.0.0-rc.18",
+    "@vuepress/plugin-git": "^2.0.0-rc.54",
     "@vuepress/plugin-medium-zoom": "^2.0.0-rc.55",
     "vue": "^3.5.0",
     "vuepress": "2.0.0-rc.18",
     "vuepress-plugin-code-copy": "^1.0.6",
-    "vuepress-theme-reco": "2.0.0-rc.25"
+    "vuepress-theme-reco": "^2.0.0-rc.25"
   },
   "devDependencies": {
-    "@vuepress/plugin-git": "next",
-    "@vuepress/plugin-markdown-ext": "next",
-    "@vuepress/plugin-markdown-math": "next",
-    "@vuepress/plugin-markdown-stylize": "next",
+    "@vuepress/plugin-git": "2.0.0-rc.54",
+    "@vuepress/plugin-markdown-ext": "2.0.0-rc.65",
+    "@vuepress/plugin-markdown-math": "2.0.0-rc.65",
+    "@vuepress/plugin-markdown-stylize": "2.0.0-rc.65",
     "@vuepress/plugin-medium-zoom": "^2.0.0-rc.55",
     "katex": "^0.16.11"
   }
