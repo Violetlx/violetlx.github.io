@@ -316,6 +316,37 @@ MybatisPlus不仅提供了BaseMapper，还提供了通用的Service接口及默�
 
 ### 3.2 基本用法
 
+由于`Service`中经常需要定义与业务有关的自定义方法，因此我们不能直接使用`IService`，而是自定义`Service`接口，然后继承`IService`以拓展方法。同时，让自定义的`Service实现类`继承`ServiceImpl`，这样就不用自己实现`IService`中的接口了。
+
+首先，定义`IUserService`，继承`IService`：
+
+```java
+package com.itheima.mp.service;
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.itheima.mp.domain.po.User;
+
+public interface IUserService extends IService<User> {
+    // 拓展自定义方法
+}
+```
+
+然后，编写`UserServiceImpl`类，继承`ServiceImpl`，实现`UserService`：
+
+```java
+package com.itheima.mp.service.impl;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.itheima.mp.domain.po.User;
+import com.itheima.mp.domain.po.service.IUserService;
+import com.itheima.mp.mapper.UserMapper;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+}
+```
+
 ### 3.3 Lambda
 
 ### 3.4 批量新增
