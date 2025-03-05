@@ -24,6 +24,7 @@
     "@vuepress/plugin-markdown-ext": "next",
     "@vuepress/plugin-markdown-math": "next",
     "@vuepress/plugin-markdown-stylize": "next",
+    "@vuepress/plugin-medium-zoom": "^2.0.0-rc.55",
     "katex": "^0.16.11"
   }
 }
