@@ -138,7 +138,7 @@ Redis诞生于2009年全称是**Re**mote  **Di**ctionary **S**erver 远程词典
 - 支持主从集群、分片集群
 - 支持多语言客户端
 
-**作者：**Antirez
+**作者：** Antirez
 
 Redis的官方网站地址：https://redis.io/
 

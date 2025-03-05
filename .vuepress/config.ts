@@ -23,6 +23,7 @@ export default defineUserConfig({
   title: "VioletDocs",
   description: "Just playing around",
   bundler: viteBundler(),
+  port: 8089,
   // bundler: webpackBundler(),
   theme: recoTheme({
     // @ts-ignore

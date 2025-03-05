@@ -3,7 +3,7 @@ title: Redis实战课程介绍
 date: 2025/02/12
 ---
 
-![16263609916378496.png](https://haowallpaper.com/link/common/file/previewFileImg/16263609916378496)
+![日落女孩微笑窗口桌面壁纸](https://bizhi1.com/wp-content/uploads/2025/02/sunset-girl-smiling-window-desktop-wallpaper-4k.jpg)
 
 
 
@@ -13,7 +13,7 @@ date: 2025/02/12
 
 ::: tip
 
-- 短信登陆
+- 短信登录
 - 商户查询缓存
 - 优惠券秒杀
 - 附近的商户

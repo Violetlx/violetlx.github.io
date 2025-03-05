@@ -19,7 +19,8 @@
   {
     "text": "Java",
     "children": [
-      { "text": "Hutool工具包", "link": "/docs/Java/Hutool/1_Hutool_Introduce/1-Hutool_Introduce" }
+      { "text": "Hutool工具包", "link": "/docs/Java/Hutool/1_Hutool_Introduce/1-Hutool_Introduce" },
+      { "text": "黑马微服务", "link": "/docs/Java/Heima/Microservices/Day01_MybatisPlus/1-MybatisPlus" }
     ]
   },
   {

@@ -3,7 +3,7 @@ title: 商户查询缓存
 date: 2025/02/14
 ---
 
-![2k宫崎骏风格猫咪壁纸｜可爱猫咪背景图片 - 萌宠「哲风壁纸」](https://haowallpaper.com/link/common/file/previewFileImg/16263593730428288)
+![桃子公主手捧星星桌面壁纸](https://bizhi1.com/wp-content/uploads/2025/02/princess-peach-holding-star-desktop-wallpaper-4k.jpg)
 
 ::: tip
 

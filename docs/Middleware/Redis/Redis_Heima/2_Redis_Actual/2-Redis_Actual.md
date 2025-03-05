@@ -3,17 +3,17 @@ title: 短信登录
 date: 2025/02/12
 ---
 
-![5k可爱猫咪壁纸｜萌猫背景图片 - 喵星人来袭「哲风壁纸」](https://haowallpaper.com/link/common/file/previewFileImg/16263609721671040)
+![八重美子原神冲击花朵桌面壁纸4K](https://bizhi1.com/wp-content/uploads/2025/02/yae-miko-genshin-impact-blossoms-desktop-wallpaper-4k.jpg)
 
 ::: tip
 
 ① 导入黑马点评项目
 
-② 基于 Session 实现登陆流程
+② 基于 Session 实现登录流程
 
 ③ 实现发送短信验证码功能
 
-④ 实现登陆拦截功能
+④ 实现登录拦截功能
 
 ⑤ 隐藏用户敏感信息
 
@@ -21,9 +21,9 @@ date: 2025/02/12
 
 ⑦ Redis 代替 session 的业务流程
 
-⑧ 基于 Redis 实现短信登陆
+⑧ 基于 Redis 实现短信登录
 
-⑨ 解决状态登陆刷新问题
+⑨ 解决状态登录刷新问题
 
 :::
 
@@ -69,7 +69,7 @@ date: 2025/02/12
 
 
 
-## ② 基于Session实现登陆流程
+## ② 基于Session实现登录流程
 
 **发送验证码：**
 

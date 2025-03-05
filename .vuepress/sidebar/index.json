@@ -9,6 +9,7 @@
       "children": ["api", "plugin"]
     }
   ],
+
   "/docs/SQL/SQL_Use/": [
     {
       "text": "SQL教程",
@@ -38,6 +39,7 @@
       ]
     }
   ],
+
   "/docs/Java/Hutool/": [
     {
       "text": "Hutool简介",
@@ -60,6 +62,17 @@
       ]
     }
   ],
+
+  "/docs/Java/Heima/Microservices/": [
+    {
+      "text": "MybatisPlus",
+      "children": [
+        "Day01_MybatisPlus/1-MybatisPlus",
+        "Day01_MybatisPlus/2-MybatisPlus"
+      ]
+    }
+  ],
+
   "/docs/Middleware/Redis/Redis_Atguigu/": [
     {
       "text": "Redis基础",
@@ -69,6 +82,7 @@
       ]
     }
   ],
+
   "/docs/Middleware/Redis/Redis_Heima/": [
     {
       "text": "Redis入门篇",
@@ -92,10 +106,14 @@
             "2_Redis_Actual/1-Redis_Actual",
             "2_Redis_Actual/2-Redis_Actual",
             "2_Redis_Actual/3-Redis_Actual",
-            "2_Redis_Actual/4-Redis_Actual"
+            "2_Redis_Actual/4-Redis_Actual",
+            "2_Redis_Actual/5-Redis_Actual",
+            "2_Redis_Actual/6-Redis_Actual",
+            "2_Redis_Actual/7-Redis_Actual"
           ]
         }
       ]
     }
   ]
+
 }
