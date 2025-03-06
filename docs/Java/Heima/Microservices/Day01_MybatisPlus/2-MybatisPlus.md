@@ -347,6 +347,275 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 }
 ```
 
+
+
 ### 3.3 Lambda
 
+IService中还提供了Lambda功能来简化我们的复杂查询及更新功能。我们通过两个案例来学习一下。
+
+案例一：实现一个根据复杂条件查询用户的接口，查询条件如下：
+
+- name：用户名关键字，可以为空
+- status：用户状态，可以为空
+- minBalance：最小余额，可以为空
+- maxBalance：最大余额，可以为空
+
+可以理解成一个用户的后台管理界面，管理员可以自己选择条件来筛选用户，因此上述条件不一定存在，需要做判断。
+
+我们首先需要定义一个查询条件实体，UserQuery实体：
+
+```java
+package com.itheima.mp.domain.query;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+@Data
+@ApiModel(description = "用户查询条件实体")
+public class UserQuery {
+    @ApiModelProperty("用户名关键字")
+    private String name;
+    @ApiModelProperty("用户状态：1-正常，2-冻结")
+    private Integer status;
+    @ApiModelProperty("余额最小值")
+    private Integer minBalance;
+    @ApiModelProperty("余额最大值")
+    private Integer maxBalance;
+}
+```
+
+接下来我们在UserController中定义一个controller方法：
+
+```java
+@GetMapping("/list")
+@ApiOperation("根据id集合查询用户")
+public List<UserVO> queryUsers(UserQuery query){
+    // 1.组织条件
+    String username = query.getName();
+    Integer status = query.getStatus();
+    Integer minBalance = query.getMinBalance();
+    Integer maxBalance = query.getMaxBalance();
+    LambdaQueryWrapper<User> wrapper = new QueryWrapper<User>().lambda()
+            .like(username != null, User::getUsername, username)
+            .eq(status != null, User::getStatus, status)
+            .ge(minBalance != null, User::getBalance, minBalance)
+            .le(maxBalance != null, User::getBalance, maxBalance);
+    // 2.查询用户
+    List<User> users = userService.list(wrapper);
+    // 3.处理vo
+    return BeanUtil.copyToList(users, UserVO.class);
+}
+```
+
+在组织查询条件的时候，我们加入了 `username != null` 这样的参数，意思就是当条件成立时才会添加这个查询条件，类似Mybatis的mapper.xml文件中的`<if>`标签。这样就实现了动态查询条件效果了。
+
+不过，上述条件构建的代码太麻烦了。 因此Service中对`LambdaQueryWrapper`和`LambdaUpdateWrapper`的用法进一步做了简化。我们无需自己通过`new`的方式来创建`Wrapper`，而是直接调用`lambdaQuery`和`lambdaUpdate`方法：
+
+基于Lambda查询：
+
+```java
+@GetMapping("/list")
+@ApiOperation("根据id集合查询用户")
+public List<UserVO> queryUsers(UserQuery query){
+    // 1.组织条件
+    String username = query.getName();
+    Integer status = query.getStatus();
+    Integer minBalance = query.getMinBalance();
+    Integer maxBalance = query.getMaxBalance();
+    // 2.查询用户
+    List<User> users = userService.lambdaQuery()
+            .like(username != null, User::getUsername, username)
+            .eq(status != null, User::getStatus, status)
+            .ge(minBalance != null, User::getBalance, minBalance)
+            .le(maxBalance != null, User::getBalance, maxBalance)
+            .list();
+    // 3.处理vo
+    return BeanUtil.copyToList(users, UserVO.class);
+}
+```
+
+可以发现lambdaQuery方法中除了可以构建条件，还需要在链式编程的最后添加一个`list()`，这是在告诉MP我们的调用结果需要是一个list集合。这里不仅可以用`list()`，可选的方法有：
+
+- `.one()`：最多1个结果
+- `.list()`：返回集合结果
+- `.count()`：返回计数结果
+
+MybatisPlus会根据链式编程的最后一个方法来判断最终的返回结果。
+
+与lambdaQuery方法类似，IService中的lambdaUpdate方法可以非常方便的实现复杂更新业务。
+
+例如下面的需求：
+
+> 需求：改造根据id修改用户余额的接口，要求如下
+>
+> - 如果扣减后余额为0，则将用户status修改为冻结状态（2）
+
+也就是说我们在扣减用户余额时，需要对用户剩余余额做出判断，如果发现剩余余额为0，则应该将status修改为2，这就是说update语句的set部分是动态的。
+
+实现如下：
+
+```java
+@Override
+@Transactional
+public void deductBalance(Long id, Integer money) {
+    // 1.查询用户
+    User user = getById(id);
+    // 2.校验用户状态
+    if (user == null || user.getStatus() == 2) {
+        throw new RuntimeException("用户状态异常！");
+    }
+    // 3.校验余额是否充足
+    if (user.getBalance() < money) {
+        throw new RuntimeException("用户余额不足！");
+    }
+    // 4.扣减余额 update tb_user set balance = balance - ?
+    int remainBalance = user.getBalance() - money;
+    lambdaUpdate()
+            .set(User::getBalance, remainBalance) // 更新余额
+            .set(remainBalance == 0, User::getStatus, 2) // 动态判断，是否更新status
+            .eq(User::getId, id)
+            .eq(User::getBalance, user.getBalance()) // 乐观锁
+            .update();
+}
+```
+
+
+
 ### 3.4 批量新增
+
+IService中的批量新增功能使用起来非常方便，但有一点注意事项，我们先来测试一下。 首先我们测试逐条插入数据：
+
+```java
+@Test
+void testSaveOneByOne() {
+    long b = System.currentTimeMillis();
+    for (int i = 1; i <= 100000; i++) {
+        userService.save(buildUser(i));
+    }
+    long e = System.currentTimeMillis();
+    System.out.println("耗时：" + (e - b));
+}
+
+private User buildUser(int i) {
+    User user = new User();
+    user.setUsername("user_" + i);
+    user.setPassword("123");
+    user.setPhone("" + (18688190000L + i));
+    user.setBalance(2000);
+    user.setInfo("{\"age\": 24, \"intro\": \"英文老师\", \"gender\": \"female\"}");
+    user.setCreateTime(LocalDateTime.now());
+    user.setUpdateTime(user.getCreateTime());
+    return user;
+}
+```
+
+执行结果如下：
+
+![image-20250306092903106](images/2-MybatisPlus/image-20250306092903106.png)
+
+可以看到速度非常慢。
+
+然后再试试MybatisPlus的批处理：
+
+```java
+@Test
+void testSaveBatch() {
+    // 准备10万条数据
+    List<User> list = new ArrayList<>(1000);
+    long b = System.currentTimeMillis();
+    for (int i = 1; i <= 100000; i++) {
+        list.add(buildUser(i));
+        // 每1000条批量插入一次
+        if (i % 1000 == 0) {
+            userService.saveBatch(list);
+            list.clear();
+        }
+    }
+    long e = System.currentTimeMillis();
+    System.out.println("耗时：" + (e - b));
+}
+```
+
+执行最终耗时如下：
+
+![image-20250306092935636](images/2-MybatisPlus/image-20250306092935636.png)
+
+可以看到使用了批处理以后，比逐条新增效率提高了10倍左右，性能还是不错的。
+
+不过，我们简单查看一下`MybatisPlus`源码：
+
+```java
+@Transactional(rollbackFor = Exception.class)
+@Override
+public boolean saveBatch(Collection<T> entityList, int batchSize) {
+    String sqlStatement = getSqlStatement(SqlMethod.INSERT_ONE);
+    return executeBatch(entityList, batchSize, (sqlSession, entity) -> sqlSession.insert(sqlStatement, entity));
+}
+// ...SqlHelper
+public static <E> boolean executeBatch(Class<?> entityClass, Log log, Collection<E> list, int batchSize, BiConsumer<SqlSession, E> consumer) {
+    Assert.isFalse(batchSize < 1, "batchSize must not be less than one");
+    return !CollectionUtils.isEmpty(list) && executeBatch(entityClass, log, sqlSession -> {
+        int size = list.size();
+        int idxLimit = Math.min(batchSize, size);
+        int i = 1;
+        for (E element : list) {
+            consumer.accept(sqlSession, element);
+            if (i == idxLimit) {
+                sqlSession.flushStatements();
+                idxLimit = Math.min(idxLimit + batchSize, size);
+            }
+            i++;
+        }
+    });
+}
+```
+
+可以发现其实`MybatisPlus`的批处理是基于`PrepareStatement`的预编译模式，然后批量提交，最终在数据库执行时还是会有多条insert语句，逐条插入数据。SQL类似这样：
+
+```sql
+Preparing: INSERT INTO user ( username, password, phone, info, balance, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+Parameters: user_1, 123, 18688190001, "", 2000, 2023-07-01, 2023-07-01
+Parameters: user_2, 123, 18688190002, "", 2000, 2023-07-01, 2023-07-01
+Parameters: user_3, 123, 18688190003, "", 2000, 2023-07-01, 2023-07-01
+```
+
+而如果想要得到最佳性能，最好是将多条SQL合并为一条，像这样：
+
+```sql
+INSERT INTO user ( username, password, phone, info, balance, create_time, update_time )
+VALUES 
+(user_1, 123, 18688190001, "", 2000, 2023-07-01, 2023-07-01),
+(user_2, 123, 18688190002, "", 2000, 2023-07-01, 2023-07-01),
+(user_3, 123, 18688190003, "", 2000, 2023-07-01, 2023-07-01),
+(user_4, 123, 18688190004, "", 2000, 2023-07-01, 2023-07-01);
+```
+
+该怎么做呢？
+
+MySQL的客户端连接参数中有这样的一个参数：`rewriteBatchedStatements`。顾名思义，就是重写批处理的`statement`语句。参考文档：
+
+https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-connp-props-performance-extensions.html#cj-conn-prop_rewriteBatchedStatements
+
+这个参数的默认值是false，我们需要修改连接参数，将其配置为true
+
+修改项目中的application.yml文件，在jdbc的url后面添加参数`&rewriteBatchedStatements=true`:
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/mp?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: MySQL123
+```
+
+再次测试插入10万条数据，可以发现速度有非常明显的提升：
+
+![image-20250306093102824](images/2-MybatisPlus/image-20250306093102824.png)
+
+在`ClientPreparedStatement`的`executeBatchInternal`中，有判断`rewriteBatchedStatements`值是否为true并重写SQL的功能：
+
+最终，SQL被重写了：
+
+![image-20250306093116507](images/2-MybatisPlus/image-20250306093116507.png)
