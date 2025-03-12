@@ -75,29 +75,29 @@ date: 2025/03/06
 
 官方网站如下：
 
-暂时无法在飞书文档外展示此内容
+<iframe src="https://nacos.io/zh-cn/" style="width: 100%; height: 60vh;"></iframe>
 
 我们基于Docker来部署Nacos的注册中心，首先我们要准备MySQL数据库表，用来存储Nacos的数据。由于是Docker部署，所以大家需要将资料中的SQL文件导入到你**Docker中的MySQL容器**中：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=NmNhZjYxMDM1ZjI2NmQ3OTZjMjcxYmViMmE5NGJiM2Ffbll4THBleFNFR2VuZHFGSDk2ekJ3Mk5XWGMxVllpUEhfVG9rZW46SFZZSmJJbjVqb2w5clB4cmdZQ2N5MmFDbmloXzE3NDE1OTY5NTY6MTc0MTYwMDU1Nl9WNA)
+![image-20250311094500269](images/4-Microservices/image-20250311094500269.png)
 
 最终表结构如下：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=ZjM2NThhZjY4NDhhOGRjODZhNDgzMGI4YTk5NDQzYzFfMkVmWk1yVjVhTmRDZDVHSnY5cE5RMmVMeUxsTHFtTlRfVG9rZW46WDNEYmJrcHROb3dCVkZ4eGNYZ2NvNzFUblliXzE3NDE1OTY5NTY6MTc0MTYwMDU1Nl9WNA)
+![image-20250311094529757](images/4-Microservices/image-20250311094529757.png)
 
 然后，找到课前资料下的nacos文件夹：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=MTI4ODBlYzc2MjA4ZmI3ZTc3NTQxODQzMDFkYWU2ZmVfZjJkcnRoWW0zMnNua3dSY2hXdUlycXI1VFc3RjVFYThfVG9rZW46WG1hOGIxZmp2b01jVHF4anhSNmNMQzdtbjVlXzE3NDE1OTY5NTY6MTc0MTYwMDU1Nl9WNA)
+![image-20250311094547034](images/4-Microservices/image-20250311094547034.png)
 
 其中的`nacos/custom.env`文件中，有一个MYSQL_SERVICE_HOST也就是mysql地址，需要修改为你自己的虚拟机IP地址：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=MGIxNjYxNGY2MTkwZDA4YTJlODM1NTA4MThkMjI3NzFfNnNLQUR2dDBvcW1QYU1zWG9udlJXOUpJQjJOV0VEWU9fVG9rZW46V1ZpZ2JlZDZVb0ZaYTF4bmZvSGNlUDJhbmVoXzE3NDE1OTY5NTY6MTc0MTYwMDU1Nl9WNA)
+![image-20250311094607429](images/4-Microservices/image-20250311094607429.png)
 
 然后，将课前资料中的`nacos`目录上传至虚拟机的`/root`目录。
 
 进入root目录，然后执行下面的docker命令：
 
-```PowerShell
+```powershell
 docker run -d \
 --name nacos \
 --env-file ./nacos/custom.env \
@@ -112,20 +112,144 @@ nacos/nacos-server:v2.1.0-slim
 
 首次访问会跳转到登录页，**账号密码都是nacos**
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=YTljNDZkOGRkMGM5YmEzNmJhY2NkZjc1NzQ5ZThmM2FfSzFXUzhtNzRFdVU1ajV5S0FhTDFJbGYwWE00ckpWU0xfVG9rZW46THUzMWJwaFVRbzZDRFZ4Qks3bWNxVWF5blZoXzE3NDE1OTY5NTY6MTc0MTYwMDU1Nl9WNA)          
+![image-20250311094708133](images/4-Microservices/image-20250311094708133.png)
+
+
+
+
 
 ## 3 服务注册
 
+接下来，我们把`item-service`注册到Nacos，步骤如下：
+
+- 引入依赖
+- 配置Nacos地址
+- 重启
+
+
+
 ### 3.1 添加依赖
+
+在`item-service`的`pom.xml`中添加依赖：
+
+```xml
+<!--nacos 服务注册发现-->
+<dependency>
+    <groupId>com.alibaba.cloud</groupId>
+    <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+</dependency>
+```
+
+
 
 ### 3.2 配置 Nacos
 
+在`item-service`的`application.yml`中添加nacos地址配置：
+
+```yaml
+spring:
+  application:
+    name: item-service # 服务名称
+  cloud:
+    nacos:
+      server-addr: 192.168.150.101:8848 # nacos地址
+```
+
+
+
 ### 3.3 启动服务实例
+
+为了测试一个服务多个实例的情况，我们再配置一个`item-service`的部署实例：
+
+![image-20250311095303173](images/4-Microservices/image-20250311095303173.png)
+
+然后配置启动项，注意重命名并且配置新的端口，避免冲突：
+
+![image-20250311095337383](images/4-Microservices/image-20250311095337383.png)
+
+重启`item-service`的两个实例：
+
+![image-20250311095350419](images/4-Microservices/image-20250311095350419.png)
+
+访问nacos控制台，可以发现服务注册成功：
+
+![image-20250311095402162](images/4-Microservices/image-20250311095402162.png)
+
+点击详情，可以查看到`item-service`服务的两个实例信息：
+
+![image-20250311095408388](images/4-Microservices/image-20250311095408388.png)
+
+
+
+
 
 ## 4 服务发现
 
+服务的消费者要去nacos订阅服务，这个过程就是服务发现，步骤如下：
+
+- 引入依赖
+- 配置Nacos地址
+- 发现并调用服务
+
+
+
 ### 4.1 引入依赖
+
+服务发现除了要引入nacos依赖以外，由于还需要负载均衡，因此要引入SpringCloud提供的LoadBalancer依赖。
+
+我们在`cart-service`中的`pom.xml`中添加下面的依赖：
+
+```xml
+<!--nacos 服务注册发现-->
+<dependency>
+    <groupId>com.alibaba.cloud</groupId>
+    <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+</dependency>
+```
+
+可以发现，这里Nacos的依赖于服务注册时一致，这个依赖中同时包含了服务注册和发现的功能。因为任何一个微服务都可以调用别人，也可以被别人调用，即可以是调用者，也可以是提供者。
+
+因此，等一会儿`cart-service`启动，同样会注册到Nacos
+
+
 
 ### 4.2 配置 Nacos 地址
 
+在`cart-service`的`application.yml`中添加nacos地址配置：
+
+```yaml
+spring:
+  cloud:
+    nacos:
+      server-addr: 192.168.150.101:8848
+```
+
+
+
 ### 4.3 发现并调用服务
+
+接下来，服务调用者`cart-service`就可以去订阅`item-service`服务了。不过item-service有多个实例，而真正发起调用时只需要知道一个实例的地址。
+
+因此，服务调用者必须利用负载均衡的算法，从多个实例中挑选一个去访问。常见的负载均衡算法有：
+
+- 随机
+- 轮询
+- IP的hash
+- 最近最少访问
+- ...
+
+这里我们可以选择最简单的随机负载均衡。
+
+另外，服务发现需要用到一个工具，DiscoveryClient，SpringCloud已经帮我们自动装配，我们可以直接注入使用：
+
+![image-20250311100417273](images/4-Microservices/image-20250311100417273.png)
+
+接下来，我们就可以对原来的远程调用做修改了，之前调用时我们需要写死服务提供者的IP和端口：
+
+![image-20250311100431652](images/4-Microservices/image-20250311100431652.png)
+
+但现在不需要了，我们通过DiscoveryClient发现服务实例列表，然后通过负载均衡算法，选择一个实例去调用：
+
+![image-20250311100440920](images/4-Microservices/image-20250311100440920.png)
+
+经过swagger测试，发现没有任何问题。
