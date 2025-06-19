@@ -238,7 +238,60 @@
             "2_Redis_Actual/4-Redis_Actual",
             "2_Redis_Actual/5-Redis_Actual",
             "2_Redis_Actual/6-Redis_Actual",
-            "2_Redis_Actual/7-Redis_Actual"
+            "2_Redis_Actual/7-Redis_Actual",
+            "2_Redis_Actual/8-Redis_Actual",
+            "2_Redis_Actual/9-Redis_Actual",
+            "2_Redis_Actual/10-Redis_Actual",
+            "2_Redis_Actual/11-Redis_Actual",
+            "2_Redis_Actual/12-Redis_Actual",
+            "2_Redis_Actual/13-Redis_Actual"
+          ]
+        }
+      ]
+    },
+    {
+      "text": "Redis高级篇",
+      "children": [
+        {
+          "text": "Redis分布式缓存",
+          "children": [
+            "3_Redis_Advanced/1_Redis_Advanced_Distributed/1-Redis_Advanced_Distributed",
+            "3_Redis_Advanced/1_Redis_Advanced_Distributed/2-Redis_Advanced_Distributed",
+            "3_Redis_Advanced/1_Redis_Advanced_Distributed/3-Redis_Advanced_Distributed",
+            "3_Redis_Advanced/1_Redis_Advanced_Distributed/4-Redis_Advanced_Distributed",
+            "3_Redis_Advanced/1_Redis_Advanced_Distributed/5-Redis_Advanced_Distributed"
+          ]
+        },
+        {
+          "text": "Redis多级缓存",
+          "children": [
+            "3_Redis_Advanced/2_Redis_Advanced_Multilevel/1-Redis_Advanced_Multilevel",
+            "3_Redis_Advanced/2_Redis_Advanced_Multilevel/2-Redis_Advanced_Multilevel",
+            "3_Redis_Advanced/2_Redis_Advanced_Multilevel/3-Redis_Advanced_Multilevel",
+            "3_Redis_Advanced/2_Redis_Advanced_Multilevel/4-Redis_Advanced_Multilevel",
+            "3_Redis_Advanced/2_Redis_Advanced_Multilevel/5-Redis_Advanced_Multilevel"
+          ]
+        },
+        {
+          "text": "Redis实践",
+          "children": [
+            "3_Redis_Advanced/3_Redis_Advanced_Practice/1-Redis_Advanced_Practice",
+            "3_Redis_Advanced/3_Redis_Advanced_Practice/2-Redis_Advanced_Practice",
+            "3_Redis_Advanced/3_Redis_Advanced_Practice/3-Redis_Advanced_Practice"
+          ]
+        }
+      ]
+    },
+    {
+      "text": "Redis原理篇",
+      "children": [
+        {
+          "text": "Redis原理",
+          "children": [
+            "4_Redis_Principle/1-Redis_Principle",
+            "4_Redis_Principle/2-Redis_Principle",
+            "4_Redis_Principle/3-Redis_Principle",
+            "4_Redis_Principle/4-Redis_Principle"
           ]
         }
       ]

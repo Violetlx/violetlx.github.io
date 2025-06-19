@@ -44,7 +44,7 @@ date: 2025/03/06
 比如昨天讲到过的下单业务，下单的过程中需要调用多个微服务：
 
 - 商品服务：扣减库存
-- 订单服务：保存订单
+- 订单服务：保存订单  
 - 购物车服务：清理购物车
 
 这些业务全部都是数据库的写操作，我们必须确保所有操作的同时成功或失败。但是这些操作在不同微服务，也就是不同的Tomcat，这样的情况如何确保事务特性呢？
@@ -132,20 +132,353 @@ date: 2025/03/06
 
 ## 2 Sentinel
 
+微服务保护的技术有很多，但在目前国内使用较多的还是Sentinel，所以接下来我们学习Sentinel的使用。
+
+
+
 ### 2.1 介绍和安装
+
+Sentinel是阿里巴巴开源的一款服务保护框架，目前已经加入SpringCloudAlibaba中。官方网站：
+
+https://sentinelguard.io/zh-cn/
+
+Sentinel 的使用可以分为两个部分:
+
+- **核心库**（Jar包）：不依赖任何框架/库，能够运行于 Java 8 及以上的版本的运行时环境，同时对 Dubbo / Spring Cloud 等框架也有较好的支持。在项目中引入依赖即可实现服务限流、隔离、熔断等功能。
+- **控制台**（Dashboard）：Dashboard 主要负责管理推送规则、监控、管理机器信息等。
+
+为了方便监控微服务，我们先把Sentinel的控制台搭建出来。
+
+1）下载jar包
+
+下载地址：
+
+https://github.com/alibaba/Sentinel/releases
+
+也可以直接使用课前资料提供的版本：
+
+![image-20250317154446530](images/1-SP_DT/image-20250317154446530.png)
+
+2）运行
+
+将jar包放在任意非中文、不包含特殊字符的目录下，重命名为`sentinel-dashboard.jar`：
+
+![image-20250317154456082](images/1-SP_DT/image-20250317154456082.png)
+
+然后运行如下命令启动控制台：
+
+```Shell
+java -Dserver.port=8090 -Dcsp.sentinel.dashboard.server=localhost:8090 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard.jar
+```
+
+其它启动时可配置参数可参考官方文档：
+
+[启动配置项](https://github.com/alibaba/Sentinel/wiki/%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE%E9%A1%B9)
+
+3）访问
+
+访问[http://localhost:8090](http://localhost:8080)页面，就可以看到sentinel的控制台了：
+
+![image-20250317154959227](images/1-SP_DT/image-20250317154959227.png)
+
+需要输入账号和密码，默认都是：sentinel
+
+登录后，即可看到控制台，默认会监控sentinel-dashboard服务本身：
+
+![image-20250317155009457](images/1-SP_DT/image-20250317155009457.png)
+
+
 
 ### 2.2 微服务整合
 
+我们在`cart-service`模块中整合sentinel，连接`sentinel-dashboard`控制台，步骤如下： 1）引入sentinel依赖
+
+```xml
+<!--sentinel-->
+<dependency>
+    <groupId>com.alibaba.cloud</groupId> 
+    <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+</dependency>
+```
+
+2）配置控制台
+
+修改application.yaml文件，添加下面内容：
+
+```yaml
+spring:
+  cloud: 
+    sentinel:
+      transport:
+        dashboard: localhost:8090
+```
+
+3）访问`cart-service`的任意端点
+
+重启`cart-service`，然后访问查询购物车接口，sentinel的客户端就会将服务访问的信息提交到`sentinel-dashboard`控制台。并展示出统计信息：
+
+![image-20250317155209205](images/1-SP_DT/image-20250317155209205.png)
+
+点击簇点链路菜单，会看到下面的页面：
+
+![image-20250317155222281](images/1-SP_DT/image-20250317155222281.png)
+
+所谓簇点链路，就是单机调用链路，是一次请求进入服务后经过的每一个被`Sentinel`监控的资源。默认情况下，`Sentinel`会监控`SpringMVC`的每一个`Endpoint`（接口）。
+
+因此，我们看到`/carts`这个接口路径就是其中一个簇点，我们可以对其进行限流、熔断、隔离等保护措施。
+
+不过，需要注意的是，我们的SpringMVC接口是按照Restful风格设计，因此购物车的查询、删除、修改等接口全部都是`/carts`路径：
+
+![image-20250317155246283](images/1-SP_DT/image-20250317155246283.png)
+
+默认情况下Sentinel会把路径作为簇点资源的名称，无法区分路径相同但请求方式不同的接口，查询、删除、修改等都被识别为一个簇点资源，这显然是不合适的。
+
+所以我们可以选择打开Sentinel的请求方式前缀，把`请求方式 + 请求路径`作为簇点资源名：
+
+首先，在`cart-service`的`application.yml`中添加下面的配置：
+
+```yaml
+spring:
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8090
+      http-method-specify: true # 开启请求方式前缀
+```
+
+然后，重启服务，通过页面访问购物车的相关接口，可以看到sentinel控制台的簇点链路发生了变化：
+
+![image-20250317155312745](images/1-SP_DT/image-20250317155312745.png)
+
+
+
+
+
 ## 3 请求限流
+
+在簇点链路后面点击流控按钮，即可对其做限流配置：
+
+![image-20250317155345297](images/1-SP_DT/image-20250317155345297.png)
+
+在弹出的菜单中这样填写：
+
+![image-20250317155356098](images/1-SP_DT/image-20250317155356098.png)
+
+这样就把查询购物车列表这个簇点资源的流量限制在了每秒6个，也就是最大QPS为6.
+
+我们利用Jemeter做限流测试，我们每秒发出10个请求：
+
+![image-20250317155408298](images/1-SP_DT/image-20250317155408298.png)
+
+最终监控结果如下：
+
+![image-20250317155417436](images/1-SP_DT/image-20250317155417436.png)
+
+可以看出`GET:/carts`这个接口的通过QPS稳定在6附近，而拒绝的QPS在4附近，符合我们的预期。
+
+
+
+
 
 ## 4 线程隔离
 
+限流可以降低服务器压力，尽量减少因并发流量引起的服务故障的概率，但并不能完全避免服务故障。一旦某个服务出现故障，我们必须隔离对这个服务的调用，避免发生雪崩。
+
+比如，查询购物车的时候需要查询商品，为了避免因商品服务出现故障导致购物车服务级联失败，我们可以把购物车业务中查询商品的部分隔离起来，限制可用的线程资源：
+
+![image-20250317155724324](images/1-SP_DT/image-20250317155724324.png)
+
+这样，即便商品服务出现故障，最多导致查询购物车业务故障，并且可用的线程资源也被限定在一定范围，不会导致整个购物车服务崩溃。
+
+所以，我们要对查询商品的FeignClient接口做线程隔离。
+
+
+
 ### 4.1 OpenFeign 整合 Sentinel
+
+修改cart-service模块的application.yml文件，开启Feign的sentinel功能：
+
+```yaml
+feign:
+  sentinel:
+    enabled: true # 开启feign对sentinel的支持
+```
+
+需要注意的是，默认情况下SpringBoot项目的tomcat最大线程数是200，允许的最大连接是8492，单机测试很难打满。
+
+所以我们需要配置一下cart-service模块的application.yml文件，修改tomcat连接：
+
+```yaml
+server:
+  port: 8082
+  tomcat:
+    threads:
+      max: 50 # 允许的最大线程数
+    accept-count: 50 # 最大排队等待数量
+    max-connections: 100 # 允许的最大连接
+```
+
+然后重启cart-service服务，可以看到查询商品的FeignClient自动变成了一个簇点资源：
+
+![image-20250317160240589](images/1-SP_DT/image-20250317160240589.png)
+
+
 
 ### 4.2 配置线程隔离
 
+接下来，点击查询商品的FeignClient对应的簇点资源后面的流控按钮：
+
+![image-20250317160346975](images/1-SP_DT/image-20250317160346975.png)
+
+在弹出的表单中填写下面内容：
+
+![image-20250317160413104](images/1-SP_DT/image-20250317160413104.png)
+
+注意，这里勾选的是并发线程数限制，也就是说这个查询功能最多使用5个线程，而不是5QPS。如果查询商品的接口每秒处理2个请求，则5个线程的实际QPS在10左右，而超出的请求自然会被拒绝。
+
+![image-20250317160434652](images/1-SP_DT/image-20250317160434652.png)
+
+我们利用Jemeter测试，每秒发送100个请求：
+
+![image-20250317160441390](images/1-SP_DT/image-20250317160441390.png)
+
+最终测试结果如下：
+
+![image-20250317160446683](images/1-SP_DT/image-20250317160446683.png)
+
+进入查询购物车的请求每秒大概在100，而在查询商品时却只剩下每秒10左右，符合我们的预期。
+
+此时如果我们通过页面访问购物车的其它接口，例如添加购物车、修改购物车商品数量，发现不受影响：
+
+![image-20250317160456270](images/1-SP_DT/image-20250317160456270.png)
+
+响应时间非常短，这就证明线程隔离起到了作用，尽管查询购物车这个接口并发很高，但是它能使用的线程资源被限制了，因此不会影响到其它接口。
+
+
+
 ## 5 服务熔断
+
+在上节课，我们利用线程隔离对查询购物车业务进行隔离，保护了购物车服务的其它接口。由于查询商品的功能耗时较高（我们模拟了500毫秒延时），再加上线程隔离限定了线程数为5，导致接口吞吐能力有限，最终QPS只有10左右。这就导致了几个问题：
+
+第一，超出的QPS上限的请求就只能抛出异常，从而导致购物车的查询失败。但从业务角度来说，即便没有查询到最新的商品信息，购物车也应该展示给用户，用户体验更好。也就是给查询失败设置一个**降级处理**逻辑。
+
+第二，由于查询商品的延迟较高（模拟的500ms），从而导致查询购物车的响应时间也变的很长。这样不仅拖慢了购物车服务，消耗了购物车服务的更多资源，而且用户体验也很差。对于商品服务这种不太健康的接口，我们应该直接停止调用，直接走降级逻辑，避免影响到当前服务。也就是将商品查询接口**熔断**。
+
+
 
 ### 5.1 编写降级逻辑
 
+触发限流或熔断后的请求不一定要直接报错，也可以返回一些默认数据或者友好提示，用户体验会更好。
+
+给FeignClient编写失败后的降级逻辑有两种方式：
+
+- 方式一：FallbackClass，无法对远程调用的异常做处理
+- 方式二：FallbackFactory，可以对远程调用的异常做处理，我们一般选择这种方式。
+
+这里我们演示方式二的失败降级处理。
+
+**步骤一**：在hm-api模块中给`ItemClient`定义降级处理类，实现`FallbackFactory`：
+
+![image-20250317160649634](images/1-SP_DT/image-20250317160649634.png)
+
+代码如下：
+
+```java
+package com.hmall.api.client.fallback;
+
+import com.hmall.api.client.ItemClient;
+import com.hmall.api.dto.ItemDTO;
+import com.hmall.api.dto.OrderDetailDTO;
+import com.hmall.common.exception.BizIllegalException;
+import com.hmall.common.utils.CollUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.openfeign.FallbackFactory;
+
+import java.util.Collection;
+import java.util.List;
+
+@Slf4j
+public class ItemClientFallback implements FallbackFactory<ItemClient> {
+    @Override
+    public ItemClient create(Throwable cause) {
+        return new ItemClient() {
+            @Override
+            public List<ItemDTO> queryItemByIds(Collection<Long> ids) {
+                log.error("远程调用ItemClient#queryItemByIds方法出现异常，参数：{}", ids, cause);
+                // 查询购物车允许失败，查询失败，返回空集合
+                return CollUtils.emptyList();
+            }
+
+            @Override
+            public void deductStock(List<OrderDetailDTO> items) {
+                // 库存扣减业务需要触发事务回滚，查询失败，抛出异常
+                throw new BizIllegalException(cause);
+            }
+        };
+    }
+}
+```
+
+**步骤二**：在`hm-api`模块中的`com.hmall.api.config.DefaultFeignConfig`类中将`ItemClientFallback`注册为一个`Bean`：
+
+![image-20250317160700648](images/1-SP_DT/image-20250317160700648.png)
+
+**步骤三**：在`hm-api`模块中的`ItemClient`接口中使用`ItemClientFallbackFactory`：
+
+![image-20250317160706639](images/1-SP_DT/image-20250317160706639.png)
+
+重启后，再次测试，发现被限流的请求不再报错，走了降级逻辑：
+
+![image-20250317160711741](images/1-SP_DT/image-20250317160711741.png)
+
+但是未被限流的请求延时依然很高：
+
+![image-20250317160717151](images/1-SP_DT/image-20250317160717151.png)
+
+导致最终的平局响应时间较长。
+
+
+
 ### 5.2 服务熔断
+
+查询商品的RT较高（模拟的500ms），从而导致查询购物车的RT也变的很长。这样不仅拖慢了购物车服务，消耗了购物车服务的更多资源，而且用户体验也很差。
+
+对于商品服务这种不太健康的接口，我们应该停止调用，直接走降级逻辑，避免影响到当前服务。也就是将商品查询接口**熔断**。当商品服务接口恢复正常后，再允许调用。这其实就是**断路器**的工作模式了。
+
+Sentinel中的断路器不仅可以统计某个接口的**慢请求比例**，还可以统计**异常请求比例**。当这些比例超出阈值时，就会**熔断**该接口，即拦截访问该接口的一切请求，降级处理；当该接口恢复正常时，再放行对于该接口的请求。
+
+断路器的工作状态切换有一个状态机来控制：
+
+![image-20250317160742307](images/1-SP_DT/image-20250317160742307.png)
+
+状态机包括三个状态：
+
+- **closed**：关闭状态，断路器放行所有请求，并开始统计异常比例、慢请求比例。超过阈值则切换到open状态
+- **open**：打开状态，服务调用被**熔断**，访问被熔断服务的请求会被拒绝，快速失败，直接走降级逻辑。Open状态持续一段时间后会进入half-open状态
+- **half-open**：半开状态，放行一次请求，根据执行结果来判断接下来的操作。 
+  - 请求成功：则切换到closed状态
+  - 请求失败：则切换到open状态
+
+我们可以在控制台通过点击簇点后的**`熔断`**按钮来配置熔断策略：
+
+![image-20250317160807541](images/1-SP_DT/image-20250317160807541.png)
+
+在弹出的表格中这样填写：
+
+![image-20250317160812724](images/1-SP_DT/image-20250317160812724.png)
+
+这种是按照慢调用比例来做熔断，上述配置的含义是：
+
+- RT超过200毫秒的请求调用就是慢调用
+- 统计最近1000ms内的最少5次请求，如果慢调用比例不低于0.5，则触发熔断
+- 熔断持续时长20s
+
+配置完成后，再次利用Jemeter测试，可以发现：
+
+![image-20250317160818030](images/1-SP_DT/image-20250317160818030.png)
+
+在一开始一段时间是允许访问的，后来触发熔断后，查询商品服务的接口通过QPS直接为0，所有请求都被熔断了。而查询购物车的本身并没有受到影响。
+
+此时整个购物车查询服务的平均RT影响不大：    
+
+![image-20250317160825515](images/1-SP_DT/image-20250317160825515.png)
