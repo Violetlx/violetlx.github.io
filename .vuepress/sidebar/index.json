@@ -296,6 +296,81 @@
         }
       ]
     }
-  ]
+  ],
 
+  "/docs/Java/Baima/JavaSE/": [
+    {
+      "text": "柏码JavaSE",
+      "children": [
+        {
+          "text": "JavaSE基础内容",
+          "children": [
+            "JavaSE/1-JavaSE",
+            "JavaSE/2-JavaSE",
+            "JavaSE/3-JavaSE",
+            "JavaSE/4-JavaSE",
+            "JavaSE/5-JavaSE",
+            "JavaSE/6-JavaSE",
+            "JavaSE/7-JavaSE",
+            "JavaSE/8-JavaSE",
+            "JavaSE/9-JavaSE"
+          ]
+        }
+      ]
+    },
+    {
+      "text": "柏码JavaJVM",
+      "children": [
+        {
+          "text": "JavaJVM虚拟机",
+          "children": [
+            "JavaJVM/1-JavaJVM",
+            "JavaJVM/2-JavaJVM",
+            "JavaJVM/3-JavaJVM",
+            "JavaJVM/4-JavaJVM"
+          ]
+        }
+      ]
+    },
+    {
+      "text": "柏码JavaJUC",
+      "children": [
+        {
+          "text": "JavaJUC并发编程",
+          "children": [
+            "JavaJUC/1-JavaJUC",
+            "JavaJUC/2-JavaJUC",
+            "JavaJUC/3-JavaJUC",
+            "JavaJUC/4-JavaJUC"
+          ]
+        }
+      ]
+    },
+    {
+      "text": "柏码JavaNIO",
+      "children": [
+        {
+          "text": "JavaNIO网络编程",
+          "children": [
+            "JavaNIO/1-JavaNIO",
+            "JavaNIO/2-JavaNIO",
+            "JavaNIO/3-JavaNIO"
+          ]
+        }
+      ]
+    },
+    {
+      "text": "柏码JavaExpand",
+      "children": [
+        {
+          "text": "JavaExpand拓展",
+          "children": [
+            "JavaExpand/1-JavaExpand",
+            "JavaExpand/2-JavaExpand",
+            "JavaExpand/3-JavaExpand"
+          ]
+        }
+      ]
+    }
+  ]
 }
