@@ -19,9 +19,10 @@
   {
     "text": "Java",
     "children": [
-      { "text": "Hutool工具包", "link": "/docs/Java/Hutool/1_Hutool_Introduce/1-Hutool_Introduce" },
+      { "text": "柏码JavaSE", "link": "/docs/Java/Baima/JavaSE/JavaSE/1-JavaSE" },
+      { "text": "黑马SSM", "link": "/docs/Java/Heima/SSM/1_Spring/1-Spring" },
       { "text": "黑马微服务", "link": "/docs/Java/Heima/Microservices/Day01_MybatisPlus/1-MybatisPlus" },
-      { "text": "柏码JavaSE", "link": "/docs/Java/Baima/JavaSE/JavaSE/1-JavaSE" }
+      { "text": "Hutool工具包", "link": "/docs/Java/Hutool/1_Hutool_Introduce/1-Hutool_Introduce" }
     ]
   },
   {
