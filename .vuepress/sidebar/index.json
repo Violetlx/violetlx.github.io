@@ -399,7 +399,61 @@
           ]
         }
       ]
+    },
+    {
+      "text": "Maven",
+      "children": [
+        {
+          "text": "Maven",
+          "children": [
+            "3_Maven/1-Maven"
+          ]
+        }
+      ]
+    },
+    {
+      "text": "SpringBoot",
+      "children": [
+        {
+          "text": "SpringBoot",
+          "children": [
+            "4_SpringBoot/1-SpringBoot"
+          ]
+        }
+      ]
+    },
+    {
+      "text": "MybatisPlus",
+      "children": [
+        {
+          "text": "MybatisPlus",
+          "children": [
+            "5_MybatisPlus/1-MybatisPlus"
+          ]
+        }
+      ]
+    }
+  ],
+
+  "/docs/Java/Heima/": [
+    {
+      "text": "函数式编程",
+      "children": [
+        "Lambda/1-Lambda"
+      ]
+    }
+  ],
+
+  "/docs/Java/Baima/": [
+    {
+      "text": "设计模式",
+      "children": [
+        "Design/1-Design",
+        "Design/2-Design",
+        "Design/3-Design",
+        "Design/4-Design",
+        "Design/5-Design"
+      ]
     }
   ]
-
 }

@@ -1,5 +1,5 @@
 ---
-title: 黑马SpringDay02
+title: SpringDay02
 date: 2025/06/20
 ---
 

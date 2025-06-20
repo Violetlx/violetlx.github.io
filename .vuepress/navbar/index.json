@@ -22,6 +22,8 @@
       { "text": "柏码JavaSE", "link": "/docs/Java/Baima/JavaSE/JavaSE/1-JavaSE" },
       { "text": "黑马SSM", "link": "/docs/Java/Heima/SSM/1_Spring/1-Spring" },
       { "text": "黑马微服务", "link": "/docs/Java/Heima/Microservices/Day01_MybatisPlus/1-MybatisPlus" },
+      { "text": "函数式编程", "link": "/docs/Java/Heima/Lambda/1-Lambda" },
+      { "text": "柏码设计模式", "link": "/docs/Java/Baima/Design/1-Design" },
       { "text": "Hutool工具包", "link": "/docs/Java/Hutool/1_Hutool_Introduce/1-Hutool_Introduce" }
     ]
   },

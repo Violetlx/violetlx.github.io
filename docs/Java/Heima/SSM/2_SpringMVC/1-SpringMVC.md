@@ -1,5 +1,5 @@
 ---
-title: 黑马SpringMVCDay01
+title: SpringMVCDay01
 date: 2025/06/20
 ---
 
