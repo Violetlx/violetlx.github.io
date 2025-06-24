@@ -1,0 +1,21 @@
+import{_ as s,c as n,b as a,o as i}from"./app-BDBTreNG.js";const l="/assets/image-20250624105346761-BEkDK78v.png",r="/assets/image-20250624105434722-B9jmsA5m.png",c={};function p(t,e){return i(),n("div",null,e[0]||(e[0]=[a('<p>title: 练习<br> date: 2025/03/06</p><p><img src="https://bizhi1.com/wp-content/uploads/2024/11/高清美女图片黄玉瑶-4K壁纸-3840x2400-1.jpg" alt="高清美女图片黄玉瑶 4K壁纸"></p><div class="custom-container tip"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 12h1v4h1"></path></g></svg><p class="custom-container-title">TIP</p><p>1 编写降级逻辑</p><p>2 解决分布式事务</p></div><h2 id="_1-编写降级逻辑" tabindex="-1"><a class="header-anchor" href="#_1-编写降级逻辑"><span>1 编写降级逻辑</span></a></h2><p>给黑马商城中现有的FeignClient都编写对应的降级逻辑，并且改造项目中每一个微服务，将OpenFeign与Sentinel整合。</p><h2 id="_2-解决分布式事务" tabindex="-1"><a class="header-anchor" href="#_2-解决分布式事务"><span>2 解决分布式事务</span></a></h2><p>除了下单业务以外，用户如果选择余额支付，前端会将请求发送到pay-service模块。而这个模块要做三件事情：</p><ul><li>直接从user-service模块调用接口，扣除余额付款</li><li>更新本地（pay-service）交易流水表状态</li><li>通知交易服务（trade-service）更新其中的业务订单状态</li></ul><p>流程如图：</p><p>暂时无法在飞书文档外展示此内容</p><p>显然，这里也存在分布式事务问题。</p><p>对应的页面如下：</p><p><img src="'+l+'" alt="image-20250624105346761"></p><p>当我们提交订单成功后，进入支付页面，选择余额支付，输入密码后点击确认支付即可。</p><p>前端会提交支付请求，业务接口的入口在<code>com.hmall.pay.controller.PayController</code>类的<code>tryPayOrderByBalance</code>方法：</p><p><img src="'+r+`" alt="image-20250624105434722"></p><p>对应的service方法如下：</p><div class="language-Java line-numbers-mode" data-highlighter="prismjs" data-ext="Java" data-title="Java"><pre><code><span class="line">@Override</span>
+<span class="line">@Transactional</span>
+<span class="line">public void tryPayOrderByBalance(PayOrderDTO payOrderDTO) {</span>
+<span class="line">    // 1.查询支付单</span>
+<span class="line">    PayOrder po = getById(payOrderDTO.getId());</span>
+<span class="line">    // 2.判断状态</span>
+<span class="line">    if(!PayStatus.WAIT_BUYER_PAY.equalsValue(po.getStatus())){</span>
+<span class="line">        // 订单不是未支付，状态异常</span>
+<span class="line">        throw new BizIllegalException(&quot;交易已支付或关闭！&quot;);</span>
+<span class="line">    }</span>
+<span class="line">    // 3.尝试扣减余额</span>
+<span class="line">    userClient.deductMoney(payOrderDTO.getPw(), po.getAmount());</span>
+<span class="line">    // 4.修改支付单状态</span>
+<span class="line">    boolean success = markPayOrderSuccess(payOrderDTO.getId(), LocalDateTime.now());</span>
+<span class="line">    if (!success) {</span>
+<span class="line">        throw new BizIllegalException(&quot;交易已支付或关闭！&quot;);</span>
+<span class="line">    }</span>
+<span class="line">    // 5.修改订单状态</span>
+<span class="line">    tradeClient.markOrderPaySuccess(po.getBizOrderNo());</span>
+<span class="line">}</span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>利用seata解决这里的分布式事务问题，并思考这个业务实现有没有什么值得改进的地方</p>`,19)]))}const o=s(c,[["render",p]]),v=JSON.parse('{"path":"/docs/Java/Heima/Microservices/Day05_SP_DT/3-SP_DT.html","title":"","lang":"en-US","frontmatter":{},"headers":[{"level":2,"title":"1 编写降级逻辑","slug":"_1-编写降级逻辑","link":"#_1-编写降级逻辑","children":[]},{"level":2,"title":"2 解决分布式事务","slug":"_2-解决分布式事务","link":"#_2-解决分布式事务","children":[]}],"filePathRelative":"docs/Java/Heima/Microservices/Day05_SP_DT/3-SP_DT.md","git":{"createdTime":1741251281000,"updatedTime":1750737247000,"contributors":[{"name":"lixuan","email":"2789968443@qq.com","commits":3}]}}');export{o as comp,v as data};
