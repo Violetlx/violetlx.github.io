@@ -37,7 +37,7 @@ date: 2025/03/06
 
 1）添加依赖：
 
-```XML
+```xml
   <!--消息发送-->
   <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -47,7 +47,7 @@ date: 2025/03/06
 
 2）配置MQ地址：
 
-```YAML
+```yaml
 spring:
   rabbitmq:
     host: 192.168.150.101 # 你的虚拟机IP
@@ -69,7 +69,7 @@ spring:
 
 其代码如下：
 
-```Java
+```java
 package com.hmall.trade.listener;
 
 import com.hmall.trade.service.IOrderService;
@@ -106,7 +106,7 @@ public class PayStatusListener {
 
 修改`pay-service`服务下的`com.hmall.pay.``service``.impl.``PayOrderServiceImpl`类中的`tryPayOrderByBalance`方法：
 
-```Java
+```java
 private final RabbitTemplate rabbitTemplate;
 
 @Override

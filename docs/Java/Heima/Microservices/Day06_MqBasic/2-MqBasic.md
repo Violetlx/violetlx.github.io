@@ -27,7 +27,7 @@ https://www.rabbitmq.com/
 
 我们同样基于Docker来安装RabbitMQ，使用下面的命令即可：
 
-```Shell
+```shell
 docker run \
  -e RABBITMQ_DEFAULT_USER=itheima \
  -e RABBITMQ_DEFAULT_PASS=123321 \

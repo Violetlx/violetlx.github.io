@@ -63,7 +63,7 @@ SpringAMQP提供了三个功能：
 
 在mq-demo这个父工程中，已经配置好了SpringAMQP相关的依赖：
 
-```XML
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -147,7 +147,7 @@ SpringAMQP提供了三个功能：
 
 首先配置MQ地址，在`publisher`服务的`application.yml`中添加配置：
 
-```YAML
+```yaml
 spring:
   rabbitmq:
     host: 192.168.150.101 # 你的虚拟机IP
@@ -159,7 +159,7 @@ spring:
 
 然后在`publisher`服务中编写测试类`SpringAmqpTest`，并利用`RabbitTemplate`实现消息发送：
 
-```Java
+```java
 package com.itheima.publisher.amqp;
 
 import org.junit.jupiter.api.Test;
@@ -197,7 +197,7 @@ public class SpringAmqpTest {
 
 首先配置MQ地址，在`consumer`服务的`application.yml`中添加配置：
 
-```YAML
+```yaml
 spring:
   rabbitmq:
     host: 192.168.150.101 # 你的虚拟机IP
@@ -209,7 +209,7 @@ spring:
 
 然后在`consumer`服务的`com.itheima.consumer.listener`包中新建一个类`SpringRabbitListener`，代码如下：
 
-```Java
+```java
 package com.itheima.consumer.listener;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -263,7 +263,7 @@ Work queues，任务模型。简单来说就是**让****多个消费者****绑�
 
 在publisher服务中的SpringAmqpTest类中添加一个测试方法：
 
-```Java
+```java
 /**
      * workQueue
      * 向队列中不停发送消息，模拟消息堆积。
@@ -288,7 +288,7 @@ public void testWorkQueue() throws InterruptedException {
 
 要模拟多个消费者绑定同一个队列，我们在consumer服务的SpringRabbitListener中添加2个新的方法：
 
-```Java
+```java
 @RabbitListener(queues = "work.queue")
 public void listenWorkQueue1(String msg) throws InterruptedException {
     System.out.println("消费者1接收到消息：【" + msg + "】" + LocalTime.now());
@@ -315,7 +315,7 @@ public void listenWorkQueue2(String msg) throws InterruptedException {
 
 最终结果如下：
 
-```Java
+```java
 消费者1接收到消息：【hello, message_0】21:06:00.869555300
 消费者2........接收到消息：【hello, message_1】21:06:00.884518
 消费者1接收到消息：【hello, message_2】21:06:00.907454400
@@ -381,7 +381,7 @@ public void listenWorkQueue2(String msg) throws InterruptedException {
 
 在spring中有一个简单的配置，可以解决这个问题。我们修改consumer服务的application.yml文件，添加配置：
 
-```YAML
+```yaml
 spring:
   rabbitmq:
     listener:
@@ -391,7 +391,7 @@ spring:
 
 再次测试，发现结果如下：
 
-```Java
+```java
 消费者1接收到消息：【hello, message_0】21:12:51.659664200
 消费者2........接收到消息：【hello, message_1】21:12:51.680610
 消费者1接收到消息：【hello, message_2】21:12:51.703625
@@ -536,7 +536,7 @@ Fanout，英文翻译是扇出，我觉得在MQ中叫广播更合适。
 
 在publisher服务的SpringAmqpTest类中添加测试方法：
 
-```Java
+```java
 @Test
 public void testFanoutExchange() {
     // 交换机名称
@@ -553,7 +553,7 @@ public void testFanoutExchange() {
 
 在consumer服务的SpringRabbitListener中添加两个方法，作为消费者：
 
-```Java
+```java
 @RabbitListener(queues = "fanout.queue1")
 public void listenFanoutQueue1(String msg) {
     System.out.println("消费者1接收到Fanout消息：【" + msg + "】");
@@ -630,7 +630,7 @@ public void listenFanoutQueue2(String msg) {
 
 在consumer服务的SpringRabbitListener中添加方法：
 
-```Java
+```java
 @RabbitListener(queues = "direct.queue1")
 public void listenDirectQueue1(String msg) {
     System.out.println("消费者1接收到direct.queue1的消息：【" + msg + "】");
@@ -648,7 +648,7 @@ public void listenDirectQueue2(String msg) {
 
 在publisher服务的SpringAmqpTest类中添加测试方法：
 
-```Java
+```java
 @Test
 public void testSendDirectExchange() {
     // 交换机名称
@@ -666,7 +666,7 @@ public void testSendDirectExchange() {
 
 我们再切换为blue这个key：
 
-```Java
+```java
 @Test
 public void testSendDirectExchange() {
     // 交换机名称
@@ -750,7 +750,7 @@ BindingKey` 一般都是有一个或多个单词组成，多个单词之间以`.
 
 在publisher服务的SpringAmqpTest类中添加测试方法：
 
-```Java
+```java
 /**
  * topicExchange
  */
@@ -771,7 +771,7 @@ public void testSendTopicExchange() {
 
 在consumer服务的SpringRabbitListener中添加方法：
 
-```Java
+```java
 @RabbitListener(queues = "topic.queue1")
 public void listenTopicQueue1(String msg){
     System.out.println("消费者1接收到topic.queue1的消息：【" + msg + "】");
@@ -828,7 +828,7 @@ SpringAMQP还提供了一个Exchange接口，来表示所有不同类型的交�
 
 在consumer中创建一个类，声明队列和交换机：
 
-```Java
+```java
 package com.itheima.consumer.config;
 
 import org.springframework.amqp.core.Binding;
@@ -889,7 +889,7 @@ public class FanoutConfig {
 
 direct模式由于要绑定多个KEY，会非常麻烦，每一个Key都要编写一个binding：
 
-```Java
+```java
 package com.itheima.consumer.config;
 
 import org.springframework.amqp.core.*;
@@ -964,7 +964,7 @@ public class DirectConfig {
 
 例如，我们同样声明Direct模式的交换机和队列：
 
-```Java
+```java
 @RabbitListener(bindings = @QueueBinding(
     value = @Queue(name = "direct.queue1"),
     exchange = @Exchange(name = "hmall.direct", type = ExchangeTypes.DIRECT),
@@ -988,7 +988,7 @@ public void listenDirectQueue2(String msg){
 
 再试试Topic模式：
 
-```Java
+```java
 @RabbitListener(bindings = @QueueBinding(
     value = @Queue(name = "topic.queue1"),
     exchange = @Exchange(name = "hmall.topic", type = ExchangeTypes.TOPIC),
@@ -1040,7 +1040,7 @@ Spring的消息发送代码接收的消息体是一个Object：
 
 具体代码：
 
-```Java
+```java
 package com.itheima.consumer.config;
 
 import org.springframework.amqp.core.Queue;
@@ -1067,7 +1067,7 @@ public class MessageConfig {
 
 我们在publisher模块的SpringAmqpTest中新增一个消息发送的代码，发送一个Map对象：
 
-```Java
+```java
 @Test
 public void testSendMap() throws InterruptedException {
     // 准备消息
@@ -1093,7 +1093,7 @@ public void testSendMap() throws InterruptedException {
 
 在`publisher`和`consumer`两个服务中都引入依赖：
 
-```XML
+```xml
 <dependency>
     <groupId>com.fasterxml.jackson.dataformat</groupId>
     <artifactId>jackson-dataformat-xml</artifactId>
@@ -1105,7 +1105,7 @@ public void testSendMap() throws InterruptedException {
 
 配置消息转换器，在`publisher`和`consumer`两个服务的启动类中添加一个Bean即可：
 
-```Java
+```java
 @Bean
 public MessageConverter messageConverter(){
     // 1.定义消息转换器
@@ -1128,7 +1128,7 @@ public MessageConverter messageConverter(){
 
 我们在consumer服务中定义一个新的消费者，publisher是用Map发送，那么消费者也一定要用Map接收，格式如下：
 
-```Java
+```java
 @RabbitListener(queues = "object.queue")
 public void listenSimpleQueueMessage(Map<String, Object> msg) throws InterruptedException {
     System.out.println("消费者接收到object.queue消息：【" + msg + "】");
