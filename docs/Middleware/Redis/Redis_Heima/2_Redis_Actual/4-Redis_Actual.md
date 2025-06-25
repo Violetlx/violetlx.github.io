@@ -412,7 +412,7 @@ public Result seckillVoucher(Long voucherId) {
     //6，扣减库存
     boolean success = seckillVoucherService.update()
             .setSql("stock= stock -1")
-            .eq("voucher_id", voucherId).update();
+            .eq("voucher_id", voucherId).gt("stock",).update();
     if (!success) {
         //扣减库存
         return Result.fail("库存不足！");

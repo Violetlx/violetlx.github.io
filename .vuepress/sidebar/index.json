@@ -202,16 +202,6 @@
     }
   ],
 
-  "/docs/Middleware/Redis/Redis_Atguigu/": [
-    {
-      "text": "Redis基础",
-      "children": [
-        "1_Redis_Base/1-Redis_Base",
-        "1_Redis_Base/2-Redis_Base"
-      ]
-    }
-  ],
-
   "/docs/Middleware/Redis/Redis_Heima/": [
     {
       "text": "Redis入门篇",
@@ -222,6 +212,13 @@
             "1_Redis_Entry/1-Redis_Entry",
             "1_Redis_Entry/2-Redis_Entry",
             "1_Redis_Entry/3-Redis_Entry"
+          ]
+        },
+        {
+          "text": "Redis基础",
+          "children": [
+            "1_Redis_Base/1-Redis_Base",
+            "1_Redis_Base/2-Redis_Base"
           ]
         }
       ]
@@ -453,6 +450,22 @@
         "Design/3-Design",
         "Design/4-Design",
         "Design/5-Design"
+      ]
+    }
+  ],
+
+  "/docs/Middleware/Git/Git_Atguigu/": [
+    {
+      "text": "初识Git",
+      "children": [
+        {
+          "text": "初识Git",
+          "children": [
+            "1_Git_Entry/1-Git_Entry",
+            "1_Git_Entry/2-Git_Entry",
+            "1_Git_Entry/3-Git_Entry"
+          ]
+        }
       ]
     }
   ]
