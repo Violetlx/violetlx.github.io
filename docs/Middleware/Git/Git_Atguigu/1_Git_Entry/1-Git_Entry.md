@@ -1,5 +1,5 @@
 ---
-title: 尚硅谷Git入门
+title: Git入门
 date: 2025/06/25
 ---
 

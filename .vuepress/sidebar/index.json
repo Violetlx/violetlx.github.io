@@ -467,6 +467,20 @@
           ]
         }
       ]
+    },
+    {
+      "text": "深入Git",
+      "children": [
+        {
+          "text": "深入Git",
+          "children": [
+            "2_Git_Advanced/1-Git_Advanced.md",
+            "2_Git_Advanced/2-Git_Advanced.md",
+            "2_Git_Advanced/3-Git_Advanced.md",
+            "2_Git_Advanced/4-Git_Advanced.md"
+          ]
+        }
+      ]
     }
   ]
 }
