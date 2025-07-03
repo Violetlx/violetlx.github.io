@@ -1,9 +1,13 @@
 ---
 title: vuepress-theme-reco
 date: 2019/04/09
+tags:
+  - reco
 categories:
- - reco
+  - reco
 ---
+
+<img src="https://bizhi1.com/wp-content/uploads/2024/11/%E9%87%91%E5%85%8B%E4%B8%9D-%E9%87%91%E5%85%8B%E6%96%AF-%E8%93%9D%E8%89%B2%E5%8F%8C%E9%A9%AC%E5%B0%BE-4k%E5%A3%81%E7%BA%B8-3840x2160-1.jpg" alt="金克丝 金克斯 蓝色双马尾 4k壁纸" style="zoom:33%;" />
 
 ![vuepress](https://img.shields.io/badge/vuepress-0.14.8-brightgreen.svg)
 ![leancloud-storage](https://img.shields.io/badge/leancloud--storage-3.10.1-orange.svg)
