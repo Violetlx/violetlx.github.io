@@ -1,1 +1,0 @@
-import{_ as t,c as e,o as a}from"./app-B-emV930.js";const o={};function r(c,n){return a(),e("div")}const l=t(o,[["render",r]]),_=JSON.parse('{"path":"/tags/tag2/1.html","title":"","lang":"en-US","frontmatter":{"layout":"Categories"},"headers":[],"filePathRelative":null,"git":{}}');export{l as comp,_ as data};

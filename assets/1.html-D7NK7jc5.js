@@ -1,0 +1,1 @@
+import{_ as t,c as e,o as a}from"./app-CezBFXHK.js";const n={};function o(r,c){return a(),e("div")}const l=t(n,[["render",o]]),i=JSON.parse('{"path":"/tags/zhongjianjian/1.html","title":"","lang":"en-US","frontmatter":{"layout":"Categories"},"headers":[],"filePathRelative":null,"git":{}}');export{l as comp,i as data};
