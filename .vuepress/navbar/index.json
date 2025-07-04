@@ -3,8 +3,8 @@
   {
     "text": "博文",
     "children": [
-      { "text": "分页", "link": "/categories/reco/1.html" },
-      { "text": "标签", "link": "/tags/tag1/1.html" },
+      { "text": "分页", "link": "/categories/Java/1.html" },
+      { "text": "标签", "link": "/tags/Java/1.html" },
       { "text": "时间轴", "link": "/timeline.html" },
       { "text": "文章列表", "link": "/posts.html" }
     ]
@@ -33,6 +33,12 @@
       { "text": "黑马Redis", "link": "/docs/Middleware/Redis/Redis_Heima/1_Redis_Entry/1-Redis_Entry" },
       { "text": "尚硅谷Git", "link": "/docs/Middleware/Git/Git_Atguigu/1_Git_Entry/1-Git_Entry" },
       { "text": "SQL使用", "link": "/docs/SQL/SQL_Use/1_SQL_Tutorial/1-SQL_Tutorial" }
+    ]
+  },
+  {
+    "text": "计算机",
+    "children": [
+      { "text": "计算机408", "link": "/docs/Computer/Computer/1_System/1-System" }
     ]
   },
   { "text": "导航", "link": "/friendship-link.html" }
