@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as n}from"./app-B_5tQx1u.js";const r={};function a(i,c){return n(),t("div")}const s=e(r,[["render",a]]),l=JSON.parse('{"path":"/friendship-link.html","title":"","lang":"en-US","frontmatter":{"layout":"FriendshipLink"},"headers":[],"filePathRelative":null,"git":{}}');export{s as comp,l as data};

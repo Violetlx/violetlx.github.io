@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./app-DlQzn5rm.js";const o={};function r(c,n){return a(),t("div")}const i=e(o,[["render",r]]),l=JSON.parse('{"path":"/categories/jisuanji/1.html","title":"","lang":"en-US","frontmatter":{"layout":"Categories"},"headers":[],"filePathRelative":null,"git":{}}');export{i as comp,l as data};
