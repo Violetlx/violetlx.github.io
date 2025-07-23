@@ -36,6 +36,14 @@
     ]
   },
   {
+    "text": "路书",
+    "children": [
+      { "text": "路书", "link": "/docs/RoadBook/RoadBook" },
+      { "text": "基础", "link": "/docs/RoadBook/1_Base/1-Base" },
+      { "text": "设计", "link": "/docs/RoadBook/2_Design/1-Design" }
+    ]
+  },
+  {
     "text": "计算机",
     "children": [
       { "text": "计算机408", "link": "/docs/Computer/Computer/1_System/1-System" }

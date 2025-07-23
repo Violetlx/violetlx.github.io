@@ -577,5 +577,39 @@
         }
       ]
     }
+  ],
+
+  "/docs/RoadBook/": [
+    {
+      "text": "路书",
+      "children": [
+        "RoadBook.md"
+      ]
+    },
+    {
+      "text": "基础",
+      "children": [
+        {
+          "text": "基础",
+          "children": [
+            "1_Base/1-Base.md",
+            "1_Base/2-Base.md",
+            "1_Base/3-Base.md",
+            "1_Base/4-Base.md"
+          ]
+        }
+      ]
+    },
+    {
+      "text": "设计",
+      "children": [
+        {
+          "text": "设计",
+          "children": [
+            "2_Design/1-Design.md"
+          ]
+        }
+      ]
+    }
   ]
 }
