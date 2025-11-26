@@ -17,18 +17,26 @@
     ]
   },
   {
+    "text": "编程",
+    "children": [
+      { "text": "计算机408", "link": "/docs/Computer/Computer/1_System/1-System" }
+    ]
+  },
+  {
     "text": "Java",
     "children": [
+      { "text": "路书", "link": "/docs/RoadBook/RoadBook" },
       { "text": "柏码JavaSE", "link": "/docs/Java/Baima/JavaSE/JavaSE/1-JavaSE" },
       { "text": "黑马SSM", "link": "/docs/Java/Heima/SSM/1_Spring/1-Spring" },
       { "text": "黑马微服务", "link": "/docs/Java/Heima/Microservices/Day01_MybatisPlus/1-MybatisPlus" },
       { "text": "函数式编程", "link": "/docs/Java/Heima/Lambda/1-Lambda" },
       { "text": "柏码设计模式", "link": "/docs/Java/Baima/Design/1-Design" },
-      { "text": "Hutool工具包", "link": "/docs/Java/Hutool/1_Hutool_Introduce/1-Hutool_Introduce" }
+      { "text": "Hutool工具包", "link": "/docs/Java/Hutool/1_Hutool_Introduce/1-Hutool_Introduce" },
+      { "text": "面试", "link": "/docs/Java/Interview/1_Interview/1-Interview" }
     ]
   },
   {
-    "text": "中间件",
+    "text": "工具",
     "children": [
       { "text": "黑马Redis", "link": "/docs/Middleware/Redis/Redis_Heima/1_Redis_Entry/1-Redis_Entry" },
       { "text": "尚硅谷Git", "link": "/docs/Middleware/Git/Git_Atguigu/1_Git_Entry/1-Git_Entry" },
@@ -36,17 +44,21 @@
     ]
   },
   {
-    "text": "路书",
+    "text": "技术",
     "children": [
-      { "text": "路书", "link": "/docs/RoadBook/RoadBook" },
-      { "text": "基础", "link": "/docs/RoadBook/1_Base/1-Base" },
-      { "text": "设计", "link": "/docs/RoadBook/2_Design/1-Design" }
+      { "text": "PR剪辑技术", "link": "/docs/Technology/PR/PR/1_PR_Entry/1-PR_Entry" }
     ]
   },
   {
-    "text": "计算机",
+    "text": "小说",
     "children": [
-      { "text": "计算机408", "link": "/docs/Computer/Computer/1_System/1-System" }
+      { "text": "第一本小说", "link": "/docs/Creation/Novel/1_First_Novel/1_First_Novel/1-First_Novel" }
+    ]
+  },
+  {
+    "text": "考试",
+    "children": [
+      { "text": "软件设计师", "link": "/docs/Exam/1_Exam/1-Exam" }
     ]
   },
   { "text": "导航", "link": "/friendship-link.html" }

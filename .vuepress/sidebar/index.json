@@ -1,4 +1,6 @@
 {
+
+
   "/docs/theme-reco/": [
     {
       "text": "module one",
@@ -9,6 +11,7 @@
       "children": ["api", "plugin"]
     }
   ],
+
 
   "/docs/SQL/SQL_Use/": [
     {
@@ -40,6 +43,7 @@
     }
   ],
 
+
   "/docs/Java/Hutool/": [
     {
       "text": "Hutool简介",
@@ -62,6 +66,22 @@
       ]
     }
   ],
+
+
+  "/docs/Java/Interview/": [
+    {
+      "text": "Java面试",
+      "children": [
+        {
+          "text": "Java并发编程篇",
+          "children": [
+            "1_Interview/1-Interview"
+          ]
+        }
+      ]
+    }
+  ],
+
 
   "/docs/Java/Heima/Microservices/": [
     {
@@ -202,6 +222,7 @@
     }
   ],
 
+
   "/docs/Middleware/Redis/Redis_Heima/": [
     {
       "text": "Redis入门篇",
@@ -295,6 +316,7 @@
     }
   ],
 
+
   "/docs/Java/Baima/JavaSE/": [
     {
       "text": "柏码JavaSE",
@@ -371,6 +393,7 @@
     }
   ],
 
+
   "/docs/Java/Heima/SSM/": [
     {
       "text": "Spring",
@@ -432,6 +455,7 @@
     }
   ],
 
+
   "/docs/Java/Heima/": [
     {
       "text": "函数式编程",
@@ -453,6 +477,7 @@
       ]
     }
   ],
+
 
   "/docs/Middleware/Git/Git_Atguigu/": [
     {
@@ -483,6 +508,7 @@
       ]
     }
   ],
+
 
   "/docs/Computer/Computer/": [
     {
@@ -579,6 +605,7 @@
     }
   ],
 
+
   "/docs/RoadBook/": [
     {
       "text": "路书",
@@ -611,5 +638,94 @@
         }
       ]
     }
+  ],
+
+
+  "/docs/Exam/": [
+    {
+      "text": "软考基础",
+      "children": [
+        {
+          "text": "软件工程师",
+          "children": [
+            "1_Exam/1-Exam.md"
+          ]
+        }
+      ]
+    },
+    {
+      "text": "软考进阶",
+      "children": [
+        {
+          "text": "基础篇",
+          "children": [
+            "2_Exam/1_Base/1-Base.md"
+          ]
+        }
+      ]
+    }
+  ],
+
+
+  "/docs/Technology/PR/": [
+    {
+      "text": "PR教程",
+      "children": [
+        {
+          "text": "PR入门",
+          "children": [
+            "PR/1_PR_Entry/1-PR_Entry.md",
+            "PR/1_PR_Entry/2-PR_Entry.md",
+            "PR/1_PR_Entry/3-PR_Entry.md",
+            "PR/1_PR_Entry/4-PR_Entry.md",
+            "PR/1_PR_Entry/5-PR_Entry.md"
+          ]
+        },
+        {
+          "text": "PR基础",
+          "children": [
+            "PR/2_PR_Base/1-PR_Base.md",
+            "PR/2_PR_Base/2-PR_Base.md",
+            "PR/2_PR_Base/3-PR_Base.md",
+            "PR/2_PR_Base/4-PR_Base.md",
+            "PR/2_PR_Base/5-PR_Base.md",
+            "PR/2_PR_Base/6-PR_Base.md",
+            "PR/2_PR_Base/7-PR_Base.md",
+            "PR/2_PR_Base/8-PR_Base.md",
+            "PR/2_PR_Base/9-PR_Base.md",
+            "PR/2_PR_Base/10-PR_Base.md"
+          ]
+        },
+        {
+          "text": "PR进阶",
+          "children": [
+            "PR/3_PR_Advanced/1-PR_Advanced.md",
+            "PR/3_PR_Advanced/2-PR_Advanced.md",
+            "PR/3_PR_Advanced/3-PR_Advanced.md",
+            "PR/3_PR_Advanced/4-PR_Advanced.md",
+            "PR/3_PR_Advanced/5-PR_Advanced.md",
+            "PR/3_PR_Advanced/6-PR_Advanced.md",
+            "PR/3_PR_Advanced/7-PR_Advanced.md",
+            "PR/3_PR_Advanced/8-PR_Advanced.md"
+          ]
+        }
+      ]
+    }
+  ],
+
+  "/docs/Creation/Novel/1_First_Novel/": [
+    {
+      "text": "小说初始",
+      "children": [
+        {
+          "text": "小说初始",
+          "children": [
+            "1_First_Novel/1-First_Novel.md"
+          ]
+        }
+      ]
+    }
   ]
+
+
 }
